@@ -1,0 +1,62 @@
+# Resumo do fluxo de custódia
+
+Este arquivo resume os artefatos usados em `custodia.tex`. Os comandos completos
+e a ordem de execução estão no documento LaTeX; esta versão não deve ser usada
+como um fluxo separado.
+
+## Chaves e metadados locais
+
+- Alice: `KPrAlice.pem`, `KPuAlice.pem`, `Alice.cert.pem`, `DEKAlice.bin`,
+  `MKAlice.hex` e `MKAlice.salt`.
+- Bob: `KPrBob.pem`, `KPuBob.pem`, `DEKBob.bin`, `MKBob.hex` e `MKBob.salt`.
+- Nova chave de Bob: `NMKBob.hex` e `NMKBob.salt`.
+
+As chaves mestras são derivadas localmente com PBKDF2, SHA-256, 600.000
+iterações e salt aleatório de 128 bits:
+
+    $ read -rs MASTER_PASSWORD
+    $ SALT_HEX=$(openssl rand -hex 16)
+    $ printf '%s' "$SALT_HEX" > MKBob.salt
+    $ openssl kdf -keylen 32 -kdfopt digest:SHA256 \
+      -kdfopt pass:"$MASTER_PASSWORD" -kdfopt salt:"$SALT_HEX" \
+      -kdfopt iter:600000 PBKDF2 | tr -d ':\n' > MKBob.hex
+
+Para Alice e para a nova chave de Bob, aplique o mesmo procedimento, trocando
+os nomes dos arquivos de saída.
+
+## Artefatos armazenados no servidor
+
+- `M1.bin` e `M1.iv`: chave privada de Alice protegida por `MKAlice.hex`.
+- `M2.bin` e `M2.iv`: DEK de Alice protegida por `MKAlice.hex`.
+- `M3.bin` e `M3.iv`: chave privada de Bob protegida por `MKBob.hex`.
+- `M4.bin` e `M4.iv`: DEK de Bob protegida por `MKBob.hex`.
+- `M5.pem`: envelope CMS da chave privada de Bob para o certificado de Alice.
+- `M6.bin`: DEK de Bob cifrada para a chave pública de Alice com RSA-OAEP.
+- `M7.bin`: nova chave mestra de Bob cifrada para a chave pública de Alice
+  com RSA-OAEP.
+- `M8.bin` e `M8.iv`: chave privada de Bob protegida por `NMKBob.hex`.
+- `M9.bin` e `M9.iv`: DEK de Bob protegida por `NMKBob.hex`.
+
+## Custódia e recuperação
+
+Bob recupera M3 e M4 com sua chave mestra, cria M5 e M6 para Alice e envia os
+dois artefatos ao servidor. Na recuperação, Bob cria `NMKBob.hex`, protege-a
+como M7 e envia M7. Alice recupera M5, M6 e M7, obtém as chaves de Bob e grava
+M8 e M9 com a nova chave mestra.
+
+Exemplos das operações de custódia:
+
+    $ openssl cms -encrypt -binary -in KPrBob.pem -out M5.pem -outform PEM \
+      -recip Alice.cert.pem -aes256
+
+    $ openssl pkeyutl -encrypt -inkey KPuAlice.pem -pubin \
+      -in DEKBob.bin -out M6.bin \
+      -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256
+
+    $ openssl pkeyutl -encrypt -inkey KPuAlice.pem -pubin \
+      -in NMKBob.hex -out M7.bin \
+      -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256
+
+Os IVs devem acompanhar os respectivos textos cifrados. Os exemplos com
+AES-CBC demonstram confidencialidade; para um sistema real seria necessário
+autenticar cada texto cifrado.

@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{authblk}
+\usepackage{graphicx} % Lib de importar e tratar imagem
+\usepackage[english,brazil]{babel} % Manter dois idiomas
+\usepackage{fancyhdr} % Configuração das paginas
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{background} % Componente de Watermark
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage[a4paper, left=2cm, right=2cm]{geometry}
+\usepackage{tcolorbox}
+
+% Diretório das Imagens
+\graphicspath{ {img/} }
+
+\newcommand{\shellcmd}[1]{\\\indent\indent\texttt{\footnotesize\# #1}\\}
+
+% Definir as características do hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+%Função para diminuir tamanho da fonte
+\newcommand{\changefont}{%
+    \fontsize{9}{12}\selectfont
+}
+
+%Document Layout Config
+\pagestyle{fancy}
+\setlength\headheight{26pt}
+\setlength\parindent{0pt}
+\fancyhf{}
+
+% Header  Config
+\fancyhead[RO]{New MySafe - Algoritmos de Criptografia}
+\fancyhead[LO]{\includegraphics[width=0.7cm]{Logo.png}}
+
+% Footer  Config
+\renewcommand{\footrulewidth}{0.4pt} % Inserir linha no final da pagina "pre-footer"
+\fancyfoot[RO]{\includegraphics[width=0.7cm]{Logo.png}}
+
+%Document Specification
+\title{Algoritmos de Criptografia}
+\author{senhasegura}
+\date{}
+\affil{Departamento de Segurança e Inovação - SEGi9}
+
+%Capa
+\begin{document}
+\NoBgThispage % Ignorar background na capa
+\maketitle
+\begin{center}
+\includegraphics{logo.png}
+\end{center}
+\begin{center}
+\textbf{\LARGE \\CONFIDENCIAL}
+\end{center}
+\pagenumbering{gobble} % Não contar como página a capa
+\pagebreak
+
+% Background a partir da segunda pagina
+\backgroundsetup{contents=\includegraphics{logo.png}, scale=1.5, opacity=0.15, angle=0} % marca d'agua
+
+%Resumo Executivo
+\section*{\centering{Resumo Executivo}}
+\vspace*{\fill}
+\large{Este texto é um estudo e um compilado de algoritmos de criptografia, suas configurações recomendadas e suas certificações.}
+\vspace*{\fill}
+\fancyfoot[CO]{senhasegura\\ \changefont Qualquer reprodução ou distribuição é estritamente proibida sem a aprovação prévia por escrito da empresa MT4.}
+\pagebreak
+
+%Sumario
+\tableofcontents
+\pagebreak
+
+%Rodapé
+\fancyfoot[CO]{\thepage\\\changefont Qualquer reprodução ou distribuição é estritamente proibida sem a aprovação prévia por escrito da empresa MT4.}
+\pagenumbering{arabic}
+
+% Página
+\section{Algoritmos}
+
+\subsection{Chave Simétrica}
+	\begin{itemize}
+		\item Algoritmo - AES-CBC
+		\item Tamanho da chave - 256 bits
+		\item Recomendação - \href{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf}{FIPS PUB 197} (Federal Information Processing Standards Publication 197)
+	\end{itemize}
+
+\subsection{Chave Assimétrica}
+	\begin{itemize}
+		\item Algoritmo - RSA
+		\item Tamanho Mínimo da chave - 2048 bits
+		\item Recomendação - NIST SP 800-57 Part 1, Rev. 5 (January 2020)
+	\end{itemize}
+
+\subsection{Hash}
+	\begin{itemize}
+		\item Algoritmo - SHA-2, especificamente SHA-256, SHA-384, e SHA-512
+		\item Tamanho da chave - 256/512 bits
+		\item Recomendação - \href{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf}{NIST - FIPS PUB 180-4}
+	\end{itemize}
+
+\subsection{HMAC}
+	\begin{itemize}
+		\item Algoritmo - SHA-2, especificamente SHA-256, SHA-384, e SHA-512
+		\item Tamanho da chave - 256/512 bits
+		\item Recomendação - \href{https://csrc.nist.gov/pubs/sp/800/224/ipd}{NIST SP 800-224}
+	\end{itemize}
+
+\subsection{Key Derivation Function (KDF)}
+	\begin{itemize}
+		\item Algoritmo -  \href{https://www.rfc-editor.org/rfc/rfc8018.html}{PBKDF2}
+		\item Características do Algoritmo
+		\begin{itemize}
+			\item \textbf{Número de Iterações} : 600.000 interações;
+			\item \textbf{Tamanho do Salt} : O salt deve ter pelo menos 128 bits (16 bytes) de comprimento;
+			\item \textbf{Tamanho da chave} : 256 bits;
+		\end{itemize}
+		\item Recomendação - \href{https://csrc.nist.gov/publications/detail/sp/800-132/final}{NIST Special Publication 800-132};
+	\end{itemize}
+
+\pagebreak
+
+%Copyright
+\vspace*{\fill}
+\begin{flushright}
+	\underline{\textit{Copyright}}\\
+	All rights reserved to MT4 Tecnologia LTDA.\bigskip
+
+	\underline{\textit{Propósito deste documento}}\\
+	New MySafe - Algoritmos de Criptografia\bigskip
+
+	\underline{\textit{Versão}}\\
+	Versão 1.0\bigskip
+
+	\underline{\textit{Autor}}\\
+	Caio Abreu Ferreira [\href{mailto:cferreira@senhasegura.com}{cferreiras@senhasegura.com}] \bigskip\\
+	
+	\underline{\textit{MT4 Tecnologia Ltda.}}\\
+	Rua Joaquim Antunes, 767 – Pinheiros – São Paulo\\
+	Phone: +55 11 3065-7070\\
+	\url{www.mt4.com.br}\\
+\end{flushright}
+
+\end{document}

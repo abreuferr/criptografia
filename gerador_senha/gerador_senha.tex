@@ -1,0 +1,265 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{authblk}
+\usepackage{graphicx} % Lib de importar e tratar imagem
+\usepackage[english,brazil]{babel} % Manter dois idiomas
+\usepackage{fancyhdr} % Configuração das paginas
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{background} % Componente de Watermark
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage[a4paper, left=2cm, right=2cm]{geometry}
+\usepackage[most]{tcolorbox}
+\usepackage{upquote}
+\usepackage{amsmath} % Pacote para fórmulas matemáticas avançadas
+
+\newcommand{\shellcmd}[1]{\\\indent\indent\texttt{\footnotesize\# #1}\\}
+
+% Definir as características do hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+%Função para diminuir tamanho da fonte
+\newcommand{\changefont}{%
+    \fontsize{9}{12}\selectfont
+}
+
+%Document Layout Config
+\pagestyle{fancy}
+\setlength\headheight{26pt}
+\setlength\parindent{0pt}
+\fancyhf{}
+
+% Header Config
+\fancyhead[RO]{Gerador de Senha}
+\fancyhead[LO]{\includegraphics[width=0.7cm]{Logo.png}}
+
+% Footer Config
+\renewcommand{\footrulewidth}{0.4pt} % Inserir linha no final da pagina "pre-footer"
+\fancyfoot[RO]{\includegraphics[width=0.7cm]{Logo.png}}
+
+%Document Specification
+\title{Gerador de Senha}
+\author{senhasegura}
+\affil{Departamento de Segurança e Inovação - SEGi9}
+\date{}
+\graphicspath{ {img/} }
+
+%Capa
+\begin{document}
+\NoBgThispage % Ignorar background na capa
+\maketitle
+\begin{center}
+\includegraphics{logo.png}
+\end{center}
+\begin{center}
+\textbf{\LARGE \\PÚBLICO}
+\end{center}
+\pagenumbering{gobble} % Não contar como página a capa
+\pagebreak
+
+% Background a partir da segunda pagina
+\backgroundsetup{contents=\includegraphics{logo.png}, scale=1.5, opacity=0.15, angle=0} % marca d'agua
+
+%Resumo Executivo
+\section*{\centering{Resumo Executivo}}
+\vspace*{\fill}
+\large{As senhas possuem níveis variados de usabilidade e segurança. Senhas simples e fáceis de memorizar são mais propensas a comprometimentos, pois estão vulneráveis a diferentes tipos de ataques. Por isso, é fundamental selecionar senhas que atendam a critérios específicos, incorporando características que aumentem sua resistência a tais ameaças.}
+\vspace*{\fill}
+\fancyfoot[CO]{senhasegura\\ \changefont Qualquer reprodução ou distribuição é estritamente proibida sem a aprovação prévia por escrito da empresa MT4.}
+\pagebreak
+
+%Sumario
+\tableofcontents
+\pagebreak
+
+%Texto
+\fancyfoot[CO]{\thepage\\\changefont Qualquer reprodução ou distribuição é estritamente proibida sem a aprovação prévia por escrito da empresa MT4.}
+\pagenumbering{arabic}
+
+% Página
+\section{Senha}
+
+A autenticação é um mecanismo de segurança utilizado para verificar a identidade de um indivíduo. Um dos principais métodos de autenticação é o uso de senhas, que, em conjunto com o nome de usuário, permite realizar o processo de login, garantindo acesso à conta e aos dados associados.
+
+\subsection{Características}
+
+Um gerador de senhas possibilita ao usuário configurar diversas características, como a quantidade de caracteres, a inclusão de letras maiúsculas, minúsculas, símbolos e números.\\
+
+Uma senha pode conter as seguintes características:
+
+\begin{itemize}
+	\item Letras minúsculas (a até z)
+	\item Letras maiúsculas (A até Z)
+	\item Caracteres especiais - ! @ \# \$ \% \^{} \& *
+	\item Números (0 até 9)
+	\item Repetição ou não de caracteres
+\end{itemize}
+
+\pagebreak
+
+% Página
+\section{Estudo}
+
+A segurança de sistemas computacionais está intimamente ligada à robustez das senhas utilizadas. Este estudo foi desenvolvido com o objetivo de avaliar diferentes características de senhas, dividindo a análise em duas partes principais: senhas com propriedades fixas e senhas com propriedades variadas.
+
+\subsection{Fixa}
+
+Nesta etapa, foram avaliadas senhas que seguem um padrão predefinido de propriedades, incluindo:\\
+
+\textbf{Calcular o número de combinações para cada tipo de caractere.}\\
+Calculando a quantidade de caracteres possíveis.
+\begin{itemize}
+	\item 03 Letras maiúsculas : $26^3$ caracteres
+	\item 03 Letras minúsculas : $26^3$ caracteres
+	\item 03 Números : $10^3$ caracteres
+	\item 03 Caracteres especiais : $8^3$ caracteres
+	\item Ordem dos caracteres não importa;
+	\item Os mesmos caracteres podem ser usados mais de uma vez;
+\end{itemize}
+
+\textbf{Determinar o número de arranjos possíveis}\\
+Após determinar os grupos de caracteres, precisamos calcular de quantas maneiras podemos organizar os 12 caracteres (3 maiúsculas, 3 minúsculas, 3 números, e 3 caracteres especiais). Esse é um problema de permutações de multiconjuntos, onde os elementos são indistinguíveis dentro de cada grupo.\\
+
+A fórmula geral para permutações de multiconjuntos é:
+
+\[
+P = \frac{n!}{k_1! \cdot k_2! \cdot k_3! \cdot k_4!}
+\]
+
+Onde:
+\begin{itemize}
+    \item $n$ é o número total de elementos,
+    \item $k_1, k_2, k_3, k_4$ são os tamanhos dos grupos.
+\end{itemize}
+
+Neste caso:
+\begin{itemize}
+    \item $n$ = 12,
+    \item $k_1 = k_2 = k_3 = k_4$  = 3.
+\end{itemize}
+
+Substituindo:
+
+\[
+P = {\frac{12!}{3! \cdot 3! \cdot 3! \cdot 3!}} { = 369.600}
+\]\\
+
+Isso significa que existem 369.600 maneiras de organizar os 12 caracteres.\\
+
+\textbf{Calcular o número total de senhas}\\
+
+O número total de senhas possíveis é o produto das combinações para cada grupo de caracteres e o número de arranjos possíveis:\\
+
+\[
+\text{Total de Senhas} = P \cdot \big( (26^3) \cdot (26^3) \cdot (10^3) \cdot (8^3) \big)
+\]
+
+\[
+\text{Total de Senhas} = 369.600 \cdot 17.576 \cdot 17.576 \cdot 1.000 \cdot 512
+\]
+
+\[
+\text{Total de Senhas} = 58.457.738.654.515.200.000 = 5,84577386545152 \times 10^{19}
+\]
+
+Este é o total de senhas possíveis para as especificações dadas.
+
+\subsection{Variada}
+
+Nesta etapa, a senha é gerada de forma aleatória, sem considerar as características definidas para a Senha Fixa mencionadas no item anterior exceto o tamanho de 12 caracteres.\\
+
+\textbf{Calcular o número de combinações para cada tipo de caractere.}\\
+Calculando a quantidade de caracteres possíveis.
+\begin{itemize}
+	\item Letras maiúsculas : $26^3$ caracteres
+	\item Letras minúsculas : $26^3$ caracteres
+	\item Números : $10^3$ caracteres
+	\item Caracteres especiais :  - $8^3$ caracteres
+\end{itemize}
+
+Portanto, o número total de caracteres disponíveis para cada posição na senha é a soma dos tamanhos desses conjuntos:\\
+
+\[
+N_{\text{total}} = 26 + 26 + 8 + 10 = 70
+\]\\
+
+\textbf{Calcular o número total de senhas}\\
+
+Se tivermos \( n \) caracteres possíveis e uma senha de \( L \) dígitos, o número total de combinações possíveis é dado por:
+
+\[
+\text{Total de Senhas} = n^L
+\]
+
+Onde:
+\begin{itemize}
+    \item \( n = 70 \) (número total de caracteres disponíveis),
+    \item \( L = 12 \) (comprimento da senha).
+\end{itemize}
+
+Substituímos os valores de \( n \) e \( L \) na fórmula:
+
+\[
+\text{Total de Senhas} = 70^{12}
+\]
+
+Calculando:
+
+\[
+\text{Total de Senhas} = 13.841.287.201.000.000.000.000 = 1,3841287201 \times 10^{22}
+\]
+
+Este é o total de senhas possíveis para as especificações dadas.
+
+\pagebreak
+
+% Página
+\section{Conclusão}
+
+Este estudo apresentou uma análise comparativa sobre o tamanho e as características de senhas, dividido em duas abordagens principais: senhas com propriedades fixas e senhas com propriedades variadas. A primeira abordagem envolveu senhas geradas a partir de critérios predefinidos, resultando em um total de combinações igual a 
+\[
+\text{Total de Senhas} = 58.457.738.654.515.200.000 = 5,84577386545152 \times 10^{19}
+\]
+
+A segunda abordagem considerou uma configuração mais ampla, com variações diversificadas, culminando em 
+\[
+\text{Total de Senhas} = 13.841.287.201.000.000.000.000 = 1,3841287201 \times 10^{22}
+\]
+combinações possíveis.\\
+
+Os resultados indicam que senhas com propriedades variadas oferecem um espaço de chave significativamente maior, contribuindo para uma robustez superior contra ataques de força bruta.
+
+\pagebreak
+
+%Copyright
+\vspace*{\fill}
+\begin{flushright}
+	\underline{\textit{Copyright}}\\
+	All rights reserved to MT4 Tecnologia LTDA.\bigskip
+
+	\underline{\textit{Propósito deste documento}}\\
+	Gerador de Senha\bigskip
+
+	\underline{\textit{Versão}}\\
+	Versão 1.0\bigskip
+
+	\underline{\textit{Autor}}\\
+	Caio Abreu Ferreira [\href{mailto:cferreira@senhasegura.com}{cferreiras@senhasegura.com}] \bigskip\\
+	
+	\underline{\textit{MT4 Tecnologia Ltda.}}\\
+	Rua Joaquim Antunes, 767 – Pinheiros – São Paulo\\
+	Phone: +55 11 3065-7070\\
+	\url{www.mt4.com.br}\\
+	\href{mailto:support@senhasegura.com}{support@senhasegura.com}\\
+\end{flushright}
+
+\end{document}
