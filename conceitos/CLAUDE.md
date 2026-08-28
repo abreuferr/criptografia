@@ -42,3 +42,44 @@ Personagens fixos: Alice, Bob, Eva (atacante passiva/interceptadora).
 - O comando de assinatura (`openssl dgst -sha256 -sign KPrBob.pem ...`)
   usa padding PKCS#1 v1.5 por padrão, sem declarar isso ou usar PSS. Ver
   ponto transversal em `../CLAUDE.md`.
+
+## Fontes .drawio (img/)
+
+8 arquivos-fonte (editáveis no draw.io). Seis têm `.png` correspondente
+referenciado no texto; dois são órfãos.
+
+- `algoritmo_simetrico.drawio` — cifra simétrica: T cifrado com K vira M
+  (`C(T,K)=M`); Bob decifra com K; Eva intercepta M. Usado em
+  "Confidencialidade" > "Algoritmo Simétrico". Idêntico ao arquivo em
+  `../kek/img/`.
+- `algoritmo_assimetrico.drawio` — cifra assimétrica: Alice cifra T com
+  KPuBob (`C(T,KPuBob)=M`); Bob decifra com KPrBob; Eva intercepta. Usado
+  em "Confidencialidade" > "Algoritmo Assimétrico". Idêntico ao arquivo em
+  `../pki/img/`.
+- `assinatura.drawio` — assinatura digital: Alice assina com KPrAlice
+  (`C(T,KPrAlice)=M`); Bob "verifica" com `D(M,KPuAlice)=T`. O diagrama
+  reproduz a mesma imprecisão já registrada como pendência no texto
+  (verificação descrita como descriptografia) — se o texto for corrigido,
+  reexportar este diagrama também. Idêntico ao arquivo em `../pki/img/`.
+- `hash.drawio` — Bob calcula `H(T)=N1`, envia T; Alice recalcula
+  `H(T)=N2`. Não há indicação visual de comparação N1×N2 nem aviso de
+  atacante ativo — mesmo ponto já registrado como pendência no texto.
+  Idêntico ao arquivo em `../pki/img/`.
+- `kdf.drawio` — entradas Senha Mestra + Salt + Nível de Dificuldade +
+  Tamanho da Chave → KDF → Chave Mestra (`MK=KDF(SM)`). Consistente com o
+  texto de KDF.
+- `kek.drawio` — fluxo completo de KEK: Senha Mestra → (KDF) → MKBob;
+  MKBob protege DEKBob (M1); DEKBob protege T (M2). Idêntico ao arquivo em
+  `../kek/img/` — coerente com o reaproveitamento de texto entre os dois
+  documentos.
+- `ca.drawio` — hierarquia CA Root → CA Intermediária → Usuário Final.
+  **Órfão**: não referenciado em `criptografia.tex`. É idêntico ao
+  `ca.drawio`/`ca.png` de `../pki/img/`, onde faz sentido (pki.tex trata
+  de hierarquia de CA). Reforça a suspeita de cópia por engano — decidir
+  remover ou integrar.
+- `confidencialidade_autenticidade.drawio` — fluxo combinado de
+  confidencialidade+autenticidade: Bob cifra T com DEKBob (M1), cifra
+  DEKBob com KPuAlice (M2); Alice decifra M2 com KPrAlice e depois M1 com
+  DEKBob. **Órfão**: não referenciado em `criptografia.tex`, que usa
+  `confidencialidade.png` (versão mais simples, só confidencialidade).
+  Pode ser diagrama preparado para ampliar a seção, ainda não integrado.

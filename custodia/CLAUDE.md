@@ -54,3 +54,27 @@ necessário realinhar texto/figura neste ponto.
   chave, quais artefatos o servidor de fato armazena, quando uma chave é
   destruída/rotacionada e como a recuperação é auditada. Isso ainda não
   foi escrito.
+
+## Fontes .drawio (img/)
+
+5 arquivos-fonte, todos com `.png` correspondente já referenciado no
+texto — nenhum órfão.
+
+- `chave_alice.drawio` — Alice gera par RSA (KPuAlice/KPrAlice) e
+  DEKAlice; MKAlice protege KPrAlice (M1) e DEKAlice (M2). Corresponde à
+  criação das chaves de Alice.
+- `chave_bob.drawio` — equivalente para Bob: MKBob protege KPrBob (M3) e
+  DEKBob (M4).
+- `custodiando.drawio` — ciclo "Protegendo"/"Recuperando" KPrBob e DEKBob
+  via MKBob (M3/M4) e depois via KPuAlice (M5/M6). Coerente com o fluxo de
+  custódia descrito acima.
+- `nova-custodia_01.drawio` — Bob deriva NMKBob e protege via KPuAlice,
+  gerando M7.
+- `nova-custodia_02.drawio` — sequência completa de recuperação por
+  Alice: decifra M1 (chave própria), depois M5/M6/M7 com KPrAlice para
+  obter KPrBob/DEKBob/NMKBob, e re-protege com NMKBob gerando M8 e M9.
+  Corresponde exatamente aos passos 5 e 6 do "Fluxo atual" já documentado
+  acima.
+
+Os cinco diagramas batem com a numeração M1–M9 e com o fluxo já revisado
+— nenhuma inconsistência entre diagrama e texto encontrada.

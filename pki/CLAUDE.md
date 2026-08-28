@@ -28,3 +28,26 @@ verificação de cadeia).
   seguida de espaço (continuação de shell inválida). Checado via
   `grep -P '\\\\[ \t]+$' pki.tex`: não há nenhuma ocorrência no arquivo
   atual. Não reintroduzir essa observação sem reconferir.
+
+## Fontes .drawio (img/)
+
+4 arquivos, todos com `.png` referenciado no texto.
+
+- `algoritmo_assimetrico.drawio` — cifra assimétrica (Alice cifra T com
+  KPuBob → M; Bob decifra com KPrBob; Eva intercepta). Idêntico a
+  `../conceitos/img/algoritmo_assimetrico.drawio`.
+- `assinatura.drawio` — assinatura digital (`C(T,KPrAlice)=M`,
+  verificação modelada como `D(M,KPuAlice)=T`). Idêntico a
+  `../conceitos/img/assinatura.drawio` — mesma imprecisão de "verificação
+  = descriptografia" presente no par de `conceitos.tex`.
+- `hash.drawio` — Bob calcula H(T)=N1, envia T; Alice recalcula H(T)=N2.
+  Idêntico a `../conceitos/img/hash.drawio`.
+- `ca.drawio` — hierarquia CA Root → CA Intermediária → Usuário Final,
+  com "Assinatura" nas setas. É o único dos quatro específico deste
+  documento (pki.tex é quem trata de hierarquia de CA). Existe uma cópia
+  idêntica e órfã em `../conceitos/img/ca.drawio` — provável origem da
+  cópia por engano apontada lá.
+
+Os quatro diagramas batem com o texto correspondente; nenhuma
+inconsistência nova além das já registradas acima (assinatura descrita
+como descriptografia, hash sem ressalva de ataque ativo).

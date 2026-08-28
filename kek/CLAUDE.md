@@ -24,3 +24,20 @@ precisa do mesmo ajuste.
 Como este é o documento menos maduro do repositório, qualquer trabalho
 aqui provavelmente envolve completar as duas seções vazias antes de
 revisar detalhes menores.
+
+## Fontes .drawio (img/)
+
+2 arquivos, ambos idênticos aos de `../conceitos/img/` (mesmo diagrama
+reaproveitado, não uma variação):
+
+- `algoritmo_simetrico.drawio` — cifra simétrica (`C(T,K)=M`; Eva
+  intercepta). Igual a `../conceitos/img/algoritmo_simetrico.drawio`.
+- `kek.drawio` — fluxo completo de KEK (Senha Mestra → KDF → MKBob →
+  protege DEKBob (M1) → protege T (M2)). Igual a
+  `../conceitos/img/kek.drawio`.
+
+Confirma, pelo lado das figuras, a nota já registrada acima de que
+`kek.tex` reaproveita conteúdo de `conceitos/criptografia.tex` quase
+literalmente — aqui isso se estende às imagens. Ao editar
+`kek.drawio`/`algoritmo_simetrico.drawio` num dos dois diretórios,
+replicar a mudança no outro.
