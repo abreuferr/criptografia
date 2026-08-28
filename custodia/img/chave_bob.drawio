@@ -13,7 +13,7 @@
         <mxCell id="mQwzgutJwy0WzqOuZ2-C-5" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Chaves RSA&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="170" y="-20" width="160" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="mQwzgutJwy0WzqOuZ2-C-6" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;KPuBob /&amp;nbsp;KPrBob&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="mQwzgutJwy0WzqOuZ2-C-5">
+        <mxCell id="mQwzgutJwy0WzqOuZ2-C-6" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;KPuBob /&amp;nbsp;KPrBob (2048 bits)&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="mQwzgutJwy0WzqOuZ2-C-5">
           <mxGeometry y="50" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="mQwzgutJwy0WzqOuZ2-C-7" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Bob&lt;/font&gt;&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -118,6 +118,15 @@
             <mxPoint x="520" y="440" as="sourcePoint" />
             <mxPoint x="600" y="440" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="note-salt-1" value="&lt;font style=&quot;font-size: 11px;&quot; color=&quot;#666666&quot;&gt;Salt (128 bits) &amp;#8594; MKBob.salt&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="330" y="215" width="150" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="note-iv-m3" value="&lt;font style=&quot;font-size: 11px;&quot; color=&quot;#666666&quot;&gt;IV &amp;#8594; M3.iv&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="435" y="163" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="note-iv-m4" value="&lt;font style=&quot;font-size: 11px;&quot; color=&quot;#666666&quot;&gt;IV &amp;#8594; M4.iv&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="660" y="264" width="160" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

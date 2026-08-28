@@ -99,7 +99,7 @@ Processo de criação das chaves, Pública (KPuAlice.pem), Privada (KPrAlice.pem
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.55]{chave_alice.png}
-	\caption{Chaves e Processos associadas a Alice}
+	\caption{Chaves e Processos associadas a Alice (M1 e M2: ver nota sobre autenticação)}
 	\label{fig:chave_alice}
 \end{figure}
 
@@ -108,7 +108,7 @@ Processo de criação das chaves, Pública (KPuAlice.pem), Privada (KPrAlice.pem
 	\begin{tcolorbox}[width=\textwidth]
 		{\scriptsize
 			\begin{verbatim}
-			$ openssl genpkey -algorithm RSA -out KPrAlice.pem
+			$ openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out KPrAlice.pem
 			$ openssl rsa -pubout -in KPrAlice.pem -out KPuAlice.pem
 			$ openssl req -new -x509 -key KPrAlice.pem -out Alice.cert.pem \
 			  -subj "/CN=Alice"
@@ -167,7 +167,7 @@ Processo de criação das chaves, Pública (KPuBob.pem), Privada (KPrBob.pem) e 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.55]{chave_bob.png}
-	\caption{Chaves e Processos associados ao Bob}
+	\caption{Chaves e Processos associados ao Bob (M3 e M4: ver nota sobre autenticação)}
 	\label{fig:chave_bob}
 \end{figure}
 
@@ -177,7 +177,7 @@ Processo de criação das chaves, Pública (KPuBob.pem), Privada (KPrBob.pem) e 
 		\begin{tcolorbox}[width=\textwidth]
 			{\scriptsize
 				\begin{verbatim}
-				$ openssl genpkey -algorithm RSA -out KPrBob.pem
+				$ openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out KPrBob.pem
 				$ openssl rsa -pubout -in KPrBob.pem -out KPuBob.pem
 				\end{verbatim}
 			}
