@@ -1,25 +1,12 @@
 # Estudos de criptografia
 
-Materiais didáticos em LaTeX. Cada subdiretório tem um documento e um
-CLAUDE.md com as particularidades daquele documento — leia o CLAUDE.md da
-pasta antes de editar o `.tex` dela.
+Materiais didáticos em LaTeX (ver README.md para a lista de documentos e o
+comando de compilação). Cada subdiretório tem um CLAUDE.md com as
+particularidades daquele documento — leia o CLAUDE.md da pasta antes de
+editar o `.tex` dela.
 
-- `algoritmo/algoritmo.tex` — algoritmos e parâmetros de referência.
-- `conceitos/criptografia.tex` — documento-base: fundamentos, KDF, KEK,
-  hash, assinatura, criptografia híbrida.
-- `custodia/custodia.tex` — custódia e recuperação de chaves.
-- `gerador_senha/gerador_senha.tex` — espaço de busca de senhas.
-- `kek/kek.tex` — KEK aplicado ao Segura Cofre (incompleto).
-- `pki/pki.tex` — PKI e autoridade certificadora.
-- `password_manager/` — tópico planejado; diretório ainda não criado.
-
-Compile a partir do diretório do documento (duas passagens, sem
-referências pendentes):
-
-```sh
-pdflatex nome-do-documento.tex
-pdflatex nome-do-documento.tex
-```
+`password_manager/` — tópico planejado; diretório ainda não criado (por
+isso não aparece no README).
 
 PDFs de `algoritmo/`, `conceitos/` e `custodia/` estão versionados no git —
 não recompilar por conta própria só para "atualizar" o PDF; isso gera diff
