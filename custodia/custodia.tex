@@ -363,9 +363,7 @@ Em um cenário em que Bob perde sua Chave Mestra (MKBob.hex), ele solicita à cu
 	\begin{tcolorbox}[width=\textwidth]
 		{\scriptsize
 			\begin{verbatim}
-			  -inkey KPrAlice.pem -out KPrBob.pem
 			$ openssl cms -decrypt -in M5.pem -inform PEM -recip Alice.cert.pem \
-			  -inkey KPrAlice.pem -out KPrBob.pem
 			  -inkey KPrAlice.pem -out KPrBob.pem
 
 			$ openssl pkeyutl -decrypt -inkey KPrAlice.pem -in M6.bin -out DEKBob.bin \

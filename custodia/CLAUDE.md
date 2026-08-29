@@ -37,19 +37,17 @@ Este fluxo já corresponde ao que as figuras (`custodiando.png`,
 `nova-custodia_01.png`, `nova-custodia_02.png`) mostram. Não é mais
 necessário realinhar texto/figura neste ponto.
 
+## Já corrigido (não reabrir como pendência)
+
+- Bug de texto na seção "Nova Custódia - Alice" (bloco de decifrar M5/M6
+  com linha `-inkey KPrAlice.pem -out KPrBob.pem` solta e duplicada) foi
+  corrigido — o comando `openssl cms -decrypt` agora aparece uma única vez,
+  limpo.
+- `openssl genpkey -algorithm RSA` para `KPrAlice.pem`/`KPrBob.pem` já
+  especifica `-pkeyopt rsa_keygen_bits:2048`, igual a `conceitos.tex`.
+
 ## Pendências reais
 
-- Bug de texto: na seção "Nova Custódia - Alice", item 4 (decifrar M5 e
-  M6), o bloco de comando tem linhas soltas e duplicadas
-  (`-inkey KPrAlice.pem -out KPrBob.pem` aparece antes e depois do
-  `openssl cms -decrypt` real). Reescrever como um único comando limpo:
-  ```
-  openssl cms -decrypt -in M5.pem -inform PEM -recip Alice.cert.pem \
-    -inkey KPrAlice.pem -out KPrBob.pem
-  ```
-- `openssl genpkey -algorithm RSA -out KPrAlice.pem` / `KPrBob.pem` não
-  especifica `-pkeyopt rsa_keygen_bits`, ao contrário de `conceitos.tex`
-  (que usa 2048 bits explícito). Padronizar.
 - Falta, antes dos comandos, um modelo de ameaça: quem pode recuperar cada
   chave, quais artefatos o servidor de fato armazena, quando uma chave é
   destruída/rotacionada e como a recuperação é auditada. Isso ainda não
