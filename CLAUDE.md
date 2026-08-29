@@ -11,7 +11,7 @@ pasta antes de editar o `.tex` dela.
 - `gerador_senha/gerador_senha.tex` — espaço de busca de senhas.
 - `kek/kek.tex` — KEK aplicado ao Segura Cofre (incompleto).
 - `pki/pki.tex` — PKI e autoridade certificadora.
-- `password_manager/` — ainda sem `.tex`.
+- `password_manager/` — tópico planejado; diretório ainda não criado.
 
 Compile a partir do diretório do documento (duas passagens, sem
 referências pendentes):
@@ -34,10 +34,11 @@ do PDF seja intencional.
   Isso detecta alteração acidental, não um atacante ativo — quem altera a
   mensagem recalcula o hash. Para integridade autenticada, usar HMAC ou
   assinatura. Adicionar a ressalva onde falta.
-- **Assinatura RSA sem declarar padding.** Os exemplos usam
-  `openssl dgst -sha256 -sign`, que é PKCS#1 v1.5 por padrão. Se a
-  intenção é RSA-PSS, declarar `-sigopt rsa_padding_mode:pss` e o hash
-  usado.
+- **Assinatura RSA sem declarar padding.** Só `conceitos.tex` tem comando
+  de assinatura de fato (`openssl dgst -sha256 -sign`, PKCS#1 v1.5 por
+  padrão); `pki.tex` trata assinatura apenas conceitualmente, sem `-sign`.
+  Se a intenção é RSA-PSS, declarar `-sigopt rsa_padding_mode:pss` e o
+  hash usado.
 - **Geração de chave RSA já padronizada com tamanho explícito.** Todos os
   `openssl genpkey` do repositório (`conceitos.tex`, `custodia.tex`,
   `pki.tex`) já passam `-pkeyopt rsa_keygen_bits` (2048 para chaves de
