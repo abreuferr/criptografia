@@ -414,61 +414,65 @@ Os comandos a seguir usam o OpenSSL para derivar uma chave com PBKDF2-HMAC-SHA-2
 % Página
 \section{Integridade}
 
-A Integridade diz respeito à precisão e consistência das informações ao longo de seu ciclo de vida. Este pilar assegura que os dados não sejam alterados de forma indevida, seja por erros acidentais ou por ações maliciosas. A integridade é mantida através de mecanismos de verificação, como somas de verificação, assinaturas digitais e funções de hash. Esses métodos permitem que qualquer alteração nos dados seja detectada, garantindo que a informação recebida é exatamente a mesma que foi enviada originalmente, sem modificações não autorizadas.
+A integridade trata da detecção de alterações indevidas nos dados. Funções de hash, MACs e assinaturas digitais podem apoiar essa verificação, mas oferecem garantias diferentes: um hash simples não autentica a origem, e seu uso para detectar adulteração deliberada depende de o resumo ser obtido por um meio confiável.
 \subsection{Hash}
 
 Um hash é uma função que transforma uma entrada de dados (que pode variar de alguns bytes a grandes volumes de dados) em uma saída de tamanho fixo, geralmente representada como uma sequência de caracteres alfanuméricos. Esta transformação é determinística, o que significa que a mesma entrada sempre produzirá a mesma saída.\\
 
 Alguns exemplos de algoritmos hash populares incluem a família de algoritmos SHA-2 (Secure Hash Algorithm 2), que inclui SHA-224, SHA-256, SHA-384 e SHA-512. Os algoritmos SHA-2 produzem hashes de diferentes tamanhos, sendo o SHA-256 e o SHA-512 os mais comuns, gerando valores de 256 e 512 bits, respectivamente.\\
 
-A Figura \ref{fig:hash} exemplifica a utilização do algoritmo de hash para verificar a integridade de uma informação enviada de \textbf{Bob} para \textbf{Alice}.\\
+A Figura \ref{fig:hash} mostra Bob enviando a mensagem e seu resumo para Alice. Ela calcula o resumo da mensagem recebida e compara os dois valores.\\
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.45]{hash.png}
-	\caption{Funcionamento do processo de utilização do algoritmo Hash}
+	\caption{Comparação de resumos para detectar divergências em uma mensagem}
 	\label{fig:hash}
 \end{figure}
 
-Inicialmente, \textbf{Bob} executa o algoritmo de hash sobre a mensagem e obtém o que normalmente é chamado de resumo. Tanto a mensagem quanto o resumo são enviados para \textbf{Alice}. \textbf{Alice} gera novamente o algoritmo de hash sobre a mensagem e compara o resultado do hash com o hash que foi enviado inicialmente por \textbf{Bob}. Se por acaso os valores forem iguais, então isso indica que não houve nenhum tipo de alteração na mensagem.\\
+Bob calcula \(h=H(T)\) e envia a mensagem \(T\) junto com o resumo \(h\). Alice calcula \(h_2=H(T_{\mathrm{recebido}})\) sobre a mensagem recebida e compara \(h_2\) com \(h\). Se forem diferentes, a mensagem recebida diverge daquela que corresponde ao resumo. Se forem iguais, isso apenas indica que a mensagem coincide com o resumo recebido; um hash simples enviado junto com a mensagem não impede que um atacante altere ambos e recalcule o resumo. Para autenticar a origem e proteger contra adulteração deliberada, use um HMAC com segredo compartilhado ou uma assinatura digital cuja chave pública de Bob seja autenticada. O hash não cifra a mensagem.\\
 
 \textbf{Prático}\\
 
-Abaixo estão exemplos de comandos utilizando o OpenSSL para realizar o processo de hash, e como é utilizado para gerar uma representação fixa de dados, independente do tamanho e do conteúdo original.
+O OpenSSL calcula resumos SHA-256 e SHA-512. Para comparar um arquivo com um resumo salvo, obtenha esse resumo por um meio confiável: se um atacante puder substituir tanto o arquivo quanto o resumo, a comparação não detectará a adulteração.
 
 \begin{enumerate}
-	\item Gerar um hash (hash.sha256) utilizando SHA-256
+	\item Salvar o resumo SHA-256 de \texttt{arquivo.txt}. O resumo de referência precisa vir de uma fonte confiável.
 	\begin{tcolorbox}[width=\textwidth]
 	{\small
 		\begin{verbatim}
-		$ openssl dgst -sha256 -out hash.sha256 arquivo.txt
+		$ openssl dgst -sha256 arquivo.txt | awk '{print $NF}' > hash.sha256
 		\end{verbatim}
 	}
 	\end{tcolorbox}
 
-	\item Verificar a integridade de um arquivo (arquivo.txt) comparando hashes
+	\item Comparar o resumo atual de \texttt{arquivo.txt} com o resumo SHA-256 salvo.
 	\begin{tcolorbox}[width=\textwidth]
 	{\small
 		\begin{verbatim}
-		$ openssl dgst -sha256 arquivo.txt
+		$ openssl dgst -sha256 arquivo.txt | awk '{print $NF}' | \
+		  cmp -s - hash.sha256 && echo "Resumo igual" || \
+		  { echo "Resumo divergente" >&2; exit 1; }
 		\end{verbatim}
 	}
 	\end{tcolorbox}
 
-	\item Gerar um hash (hash.sha512) utilizando SHA-512
+	\item Salvar o resumo SHA-512 de \texttt{arquivo.txt}. O resumo de referência precisa vir de uma fonte confiável.
 	\begin{tcolorbox}[width=\textwidth]
 	{\small
 		\begin{verbatim}
-		$ openssl dgst -sha512 -out hash.sha512 arquivo.txt
+		$ openssl dgst -sha512 arquivo.txt | awk '{print $NF}' > hash.sha512
 		\end{verbatim}
 	}
 	\end{tcolorbox}
 
-	\item Verificar a integridade de um arquivo (arquivo.txt) comparando hashes
+	\item Comparar o resumo atual de \texttt{arquivo.txt} com o resumo SHA-512 salvo.
 	\begin{tcolorbox}[width=\textwidth]
 	{\small
 		\begin{verbatim}
-		$ openssl dgst -sha512 arquivo.txt
+		$ openssl dgst -sha512 arquivo.txt | awk '{print $NF}' | \
+		  cmp -s - hash.sha512 && echo "Resumo igual" || \
+		  { echo "Resumo divergente" >&2; exit 1; }
 		\end{verbatim}
 	}
 	\end{tcolorbox}
