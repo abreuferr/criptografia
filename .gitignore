@@ -1,0 +1,10 @@
+# PDFs não versionados neste projeto (ver CLAUDE.md: só algoritmo/, conceitos/ e custodia/ versionam PDF)
+pki/*.pdf
+kek/*.pdf
+gerador_senha/*.pdf
+
+# Artefatos de compilação do LaTeX
+*.aux
+*.log
+*.out
+*.toc
