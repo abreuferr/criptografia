@@ -557,98 +557,93 @@ A Figura \ref{fig:assinatura} mostra esse fluxo. Alice precisa obter uma chave p
 % Página
 \section{Confidencialidade com Criptografia Híbrida}
 
-Este exemplo demonstra confidencialidade por criptografia híbrida: Bob cifra o texto com uma chave de dados aleatória e cifra essa chave de dados com a chave pública de Alice. O fluxo não autentica Bob; para isso, seria necessário incluir uma assinatura digital ou um MAC.
+Na criptografia híbrida, Bob gera uma chave de dados aleatória (DEK) e usa uma cifra simétrica para proteger a mensagem. Em seguida, cifra a DEK com a chave pública de Alice. Neste exemplo, \(M1\) é a mensagem cifrada com AES-256-CBC e \(M2\) é a DEK cifrada com RSA-OAEP e SHA-256. Bob envia \(M1\), \(M2\) e o IV de \(M1\); Alice recupera a DEK com sua chave privada e então decifra \(M1\). O servidor pode armazenar e encaminhar esses valores, mas não consegue recuperar a mensagem sem a chave privada de Alice.
+
+Bob precisa obter a chave pública de Alice por um meio confiável e validar que ela realmente pertence a Alice, por exemplo conferindo um certificado ou um fingerprint por canal independente. Cifrar a DEK com RSA-OAEP protege essa chave para Alice, mas não autentica Bob.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.45]{confidencialidade.png}
-	\caption{Confidencialidade de uma mensagem com criptografia híbrida}
+	\includegraphics[width=\textwidth]{confidencialidade_autenticidade.png}
+	\caption{Proteção híbrida da mensagem: AES cifra os dados e RSA-OAEP protege a chave de dados}
 	\label{fig:confidencialidade_hibrida}
 \end{figure}
 
-- \textbf{Criação das Chaves de Criptografia}
+\textbf{Criação do par de chaves de Alice}
 
+Alice cria um par RSA. Ela mantém KPrAlice em segredo e disponibiliza KPuAlice com um mecanismo que permita a Bob autenticar a chave pública.
+\begin{tcolorbox}[width=\textwidth]
+	{\small
+		\begin{verbatim}
+		$ umask 077
+		$ openssl genpkey -algorithm RSA -out KPrAlice.pem -pkeyopt rsa_keygen_bits:3072
+		$ openssl pkey -in KPrAlice.pem -pubout -out KPuAlice.pem
+		\end{verbatim}
+	}
+\end{tcolorbox}
+
+\textbf{Cifragem híbrida (Bob)}
+
+Bob gera uma DEK aleatória de 256 bits, cifra T.txt com AES-256-CBC e cifra a DEK com KPuAlice usando RSA-OAEP/SHA-256.
 \begin{enumerate}
-	\item Bob cria o seu par de chaves, Chave Pública(KPuBob.pem) e Chave Privada(KPrBob.pem);
+	\item Gerar a DEK e cifrar o texto. M1.iv deve acompanhar M1.enc.
 	\begin{tcolorbox}[width=\textwidth]
-		{\small
-			\begin{verbatim}
-			$ openssl genpkey -algorithm RSA -out KPrBob.pem -pkeyopt rsa_keygen_bits:2048
-			$ openssl rsa -pubout -in KPrBob.pem -out KPuBob.pem
-			\end{verbatim}
-		}
+	{\small
+		\begin{verbatim}
+		$ umask 077
+		$ openssl rand -out DEKBob.bin 32
+		$ DEK_HEX=$(od -An -v -tx1 DEKBob.bin | tr -d ' \n')
+		$ IV_HEX=$(openssl rand -hex 16)
+		$ printf '%s' "$IV_HEX" > M1.iv
+		$ openssl enc -aes-256-cbc -K "$DEK_HEX" -iv "$IV_HEX" \
+		  -in T.txt -out M1.enc
+		\end{verbatim}
+	}
 	\end{tcolorbox}
-	\item Bob envia a sua Chave Pública(KPuBob.pem) para o servidor;
-	\item Alice cria o seu par de chaves, Chave Pública(KPuAlice.pem) e Chave Privada(KPrAlice.pem);
+
+	\item Cifrar a DEK com a chave pública autenticada de Alice, gerando M2.
 	\begin{tcolorbox}[width=\textwidth]
-		{\small
-			\begin{verbatim}
-			$ openssl genpkey -algorithm RSA -out KPrAlice.pem -pkeyopt rsa_keygen_bits:2048
-			$ openssl rsa -pubout -in KPrAlice.pem -out KPuAlice.pem
-			\end{verbatim}
-		}
+	{\small
+		\begin{verbatim}
+		$ openssl pkeyutl -encrypt -in DEKBob.bin -inkey KPuAlice.pem -pubin \
+		  -out M2.enc -pkeyopt rsa_padding_mode:oaep \
+		  -pkeyopt rsa_oaep_md:sha256 -pkeyopt rsa_mgf1_md:sha256
+		\end{verbatim}
+	}
 	\end{tcolorbox}
-	\item Alice envia a sua Chave Pública(KPuAlice.pem) para o servidor;
+
+	\item Enviar M1.enc, M1.iv e M2.enc para Alice ou armazená-los no servidor para ela recuperar depois.
 \end{enumerate}
 
-- \textbf{Cifragem híbrida (Bob)}
+\textbf{Decifragem (Alice)}
 
+Alice usa KPrAlice para recuperar a DEK de M2 e, com essa DEK e o IV, decifra M1.
 \begin{enumerate}
-	\setcounter{enumi}{4} % Define o contador para começar do número 5
-	\item Bob gera uma Chave de Dados (DEKBob.bin) e a utiliza para cifrar o Texto Plano, gerando o Texto Cifrado M1;
+	\item Recuperar a DEK de M2.
 	\begin{tcolorbox}[width=\textwidth]
-		{\small
-			\begin{verbatim}
-				# Gerar uma chave simétrica (DEKBob.bin)
-				$ openssl rand -out DEKBob.bin 32
-				
-				# Criptografar T.txt usando a chave bruta DEKBob.bin e um IV aleatório
-				$ DEK_HEX=$(od -An -v -tx1 DEKBob.bin | tr -d ' \n')
-				$ IV_HEX=$(openssl rand -hex 16)
-				$ printf '%s' "$IV_HEX" > M1.iv
-				$ openssl enc -aes-256-cbc -K "$DEK_HEX" -iv "$IV_HEX" \
-				  -in T.txt -out M1.enc
-			\end{verbatim}
-		}
+	{\small
+		\begin{verbatim}
+		$ openssl pkeyutl -decrypt -in M2.enc -inkey KPrAlice.pem \
+		  -out DEKBob.bin -pkeyopt rsa_padding_mode:oaep \
+		  -pkeyopt rsa_oaep_md:sha256 -pkeyopt rsa_mgf1_md:sha256
+		\end{verbatim}
+	}
 	\end{tcolorbox}
-	\item Bob recupera a Chave Pública da Alice(KPuAlice)
-	\item Bob cifra a sua Chave de Dados (DEKBob.bin) com a Chave Pública da Alice (KPuAlice.pem), gerando o Texto Cifrado M2;
+
+	\item Decifrar M1 com a DEK recuperada e o IV associado.
 	\begin{tcolorbox}[width=\textwidth]
-		{\small
-			\begin{verbatim}
-				# Criptografar a chave AES usando a chave pública de Alice (KPuAlice.pem)
-				$ openssl pkeyutl -encrypt -in DEKBob.bin -inkey KPuAlice.pem -pubin -out M2.enc \
-				  -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256
-			\end{verbatim}
-		}
+	{\small
+		\begin{verbatim}
+		$ DEK_HEX=$(od -An -v -tx1 DEKBob.bin | tr -d ' \n')
+		$ openssl enc -d -aes-256-cbc -K "$DEK_HEX" -iv "$(cat M1.iv)" \
+		  -in M1.enc -out T.txt
+		\end{verbatim}
+	}
 	\end{tcolorbox}
-	\item Bob envia o Texto Cifrado M1 e M2 para o servidor;
 \end{enumerate}
 
-- \textbf{Decifragem (Alice)}
+\textbf{Limites deste exemplo}
 
-\begin{enumerate}
-	\setcounter{enumi}{8} % Define o contador para começar do número 10
-	\item Alice descriptografa o Texto Cifrado M2 com sua Chave Privada (KPrAlice.pem) para obter a Chave de Dados (DEKBob.bin);
-	\begin{tcolorbox}[width=\textwidth]
-		{\small
-			\begin{verbatim}
-			$ openssl pkeyutl -decrypt -in M2.enc -inkey KPrAlice.pem -out DEKBob.bin \
-			  -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256
-			\end{verbatim}
-		}
-	\end{tcolorbox}
-	\item Alice descriptografa o Texto Cifrado M1 com a DEK do Bob (DEKBob.bin) e o IV associado para obter o Texto Plano (T);
-	\begin{tcolorbox}[width=\textwidth]
-		{\small
-			\begin{verbatim}
-			$ DEK_HEX=$(od -An -v -tx1 DEKBob.bin | tr -d ' \n')
-			$ openssl enc -d -aes-256-cbc -K "$DEK_HEX" -iv "$(cat M1.iv)" \
-			  -in M1.enc -out T.txt
-			\end{verbatim}
-		}
-	\end{tcolorbox}
-\end{enumerate}
+AES-CBC fornece confidencialidade, mas não autentica nem detecta adulteração. O fluxo também não prova que Bob enviou a mensagem. Em produção, prefira uma cifra AEAD, como AES-GCM, e autentique Bob com uma assinatura digital ou um MAC apropriado. Os comandos com \texttt{openssl enc -K} são didáticos: a DEK aparece nos argumentos do processo e não deve ser manipulada dessa forma em produção.
 
 \pagebreak
 
