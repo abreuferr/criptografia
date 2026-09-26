@@ -1,70 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
 <mxfile host="app.diagrams.net" version="26.1.0">
   <diagram name="Page-1" id="digital-signature-flow">
     <mxGraphModel grid="1" page="1" gridSize="10" pageScale="1" pageWidth="1250" pageHeight="500" math="0" shadow="0" background="#ffffff">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="bob_lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+        <mxCell id="bob_lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="20" y="20" width="500" height="340" as="geometry" />
         </mxCell>
-        <mxCell id="alice_lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+        <mxCell id="alice_lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="560" y="20" width="650" height="340" as="geometry" />
         </mxCell>
-        <mxCell id="bob_label" value="&lt;b&gt;Bob&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="bob_label" value="&lt;b&gt;Bob&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=14;fillColor=none;strokeColor=none;strokeWidth=2;fontFamily=Helvetica;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="35" y="30" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="alice_label" value="&lt;b&gt;Alice&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="alice_label" value="&lt;b&gt;Alice&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=14;fillColor=none;strokeColor=none;strokeWidth=2;fontFamily=Helvetica;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="575" y="30" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="message" value="Mensagem&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="message" value="Mensagem&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="55" y="75" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="sign" value="Assina a mensagem&lt;br&gt;&lt;b&gt;σ = Sign(KPrBob, T)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="sign" value="Assina a mensagem&lt;br&gt;&lt;b&gt;σ = Sign(KPrBob, T)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="280" y="135" width="200" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="private" value="Chave privada de Bob&lt;br&gt;&lt;b&gt;KPrBob&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="private" value="Chave privada de Bob&lt;br&gt;&lt;b&gt;KPrBob&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="280" y="260" width="200" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="received_t" value="Mensagem recebida&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="received_t" value="Mensagem recebida&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="600" y="75" width="145" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="received_sig" value="Assinatura recebida&lt;br&gt;&lt;b&gt;σ&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="received_sig" value="Assinatura recebida&lt;br&gt;&lt;b&gt;σ&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="600" y="190" width="145" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="verify" value="Verifica assinatura&lt;br&gt;&lt;b&gt;Verify(KPuBob, T, σ)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="verify" value="Verifica assinatura&lt;br&gt;&lt;b&gt;Verify(KPuBob, T, σ)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="810" y="115" width="190" height="115" as="geometry" />
         </mxCell>
-        <mxCell id="public" value="Chave pública de Bob&lt;br&gt;&lt;b&gt;KPuBob autenticada&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="public" value="Chave pública de Bob&lt;br&gt;&lt;b&gt;KPuBob autenticada&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="810" y="275" width="190" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="result" value="Resultado&lt;br&gt;&lt;b&gt;Válida / Inválida&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5e1;strokeColor=#228b22;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="result" value="Resultado&lt;br&gt;&lt;b&gt;Válida / Inválida&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="1040" y="145" width="145" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="note" value="A assinatura não cifra a mensagem. Para associar KPuBob a Bob, Alice precisa confiar na chave pública (por exemplo, validar certificado ou fingerprint)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="note" value="A assinatura não cifra a mensagem. Para associar KPuBob a Bob, Alice precisa confiar na chave pública (por exemplo, validar certificado ou fingerprint)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="80" y="395" width="1100" height="65" as="geometry" />
         </mxCell>
-        <mxCell id="e_message_sign" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="message" target="sign">
+        <mxCell id="e_message_sign" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;fontFamily=Helvetica;" edge="1" parent="1" source="message" target="sign">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_private_sign" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="private" target="sign">
+        <mxCell id="e_private_sign" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;fontFamily=Helvetica;" edge="1" parent="1" source="private" target="sign">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_message_send" value="Mensagem T" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="message" target="received_t">
+        <mxCell id="e_message_send" value="Mensagem T" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;fontFamily=Helvetica;" edge="1" parent="1" source="message" target="received_t">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_signature_send" value="Assinatura σ" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="sign" target="received_sig">
+        <mxCell id="e_signature_send" value="Assinatura σ" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;fontFamily=Helvetica;" edge="1" parent="1" source="sign" target="received_sig">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_t_verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="received_t" target="verify">
+        <mxCell id="e_t_verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;fontFamily=Helvetica;" edge="1" parent="1" source="received_t" target="verify">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_sig_verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="received_sig" target="verify">
+        <mxCell id="e_sig_verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;fontFamily=Helvetica;" edge="1" parent="1" source="received_sig" target="verify">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_key_verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="public" target="verify">
+        <mxCell id="e_key_verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;fontFamily=Helvetica;" edge="1" parent="1" source="public" target="verify">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_result" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="verify" target="result">
+        <mxCell id="e_result" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;fontFamily=Helvetica;" edge="1" parent="1" source="verify" target="result">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
