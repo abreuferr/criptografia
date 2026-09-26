@@ -487,9 +487,9 @@ A Autenticidade está relacionada à verificação da identidade das partes envo
 
 \subsection{Assinatura Digital}
 
-Uma assinatura digital permite verificar se uma mensagem corresponde a uma assinatura produzida com a chave privada associada à chave pública usada na verificação. Ela ajuda a detectar alterações na mensagem e a autenticar a origem da assinatura, desde que a chave pública esteja autenticada. A assinatura digital não cifra a mensagem nem fornece confidencialidade.
+Uma assinatura digital permite verificar se uma mensagem corresponde a uma assinatura produzida com a chave privada associada à chave pública usada na verificação. Ela ajuda a detectar alterações na mensagem e a autenticar a origem da assinatura, desde que a chave pública esteja autenticada. A assinatura digital não cifra a mensagem nem fornece confidencialidade.\\
 
-\textbf{Funcionamento}
+\textbf{Funcionamento}\\
 
 Bob calcula uma assinatura \(\sigma=\mathrm{Sign}(KPrBob,T)\) sobre a mensagem \(T\) e envia a mensagem junto com \(\sigma\). Na prática, algoritmos de assinatura costumam aplicar internamente uma função de hash; isso não significa que o resumo seja simplesmente cifrado com a chave privada. Alice verifica a assinatura com \(\mathrm{Verify}(KPuBob,T,\sigma)\), que retorna válida ou inválida.
 
@@ -497,7 +497,7 @@ A Figura \ref{fig:assinatura} mostra esse fluxo. Alice precisa obter uma chave p
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.55]{assinatura.png}
+	\includegraphics[scale=0.40]{assinatura.png}
 	\caption{Bob assina uma mensagem e Alice verifica a assinatura com a chave pública autenticada}
 	\label{fig:assinatura}
 \end{figure}
@@ -557,7 +557,7 @@ A Figura \ref{fig:assinatura} mostra esse fluxo. Alice precisa obter uma chave p
 % Página
 \section{Confidencialidade com Criptografia Híbrida}
 
-Na criptografia híbrida, Bob gera uma chave de dados aleatória (DEK) e usa uma cifra simétrica para proteger a mensagem. Em seguida, cifra a DEK com a chave pública de Alice. Neste exemplo, \(M1\) é a mensagem cifrada com AES-256-CBC e \(M2\) é a DEK cifrada com RSA-OAEP e SHA-256. Bob envia \(M1\), \(M2\) e o IV de \(M1\); Alice recupera a DEK com sua chave privada e então decifra \(M1\). O servidor pode armazenar e encaminhar esses valores, mas não consegue recuperar a mensagem sem a chave privada de Alice.
+Na criptografia híbrida, Bob gera uma chave de dados aleatória (DEK) e usa uma cifra simétrica para proteger a mensagem. Em seguida, cifra a DEK com a chave pública de Alice. Neste exemplo, \(M1\) é a mensagem cifrada com AES-256-CBC e \(M2\) é a DEK cifrada com RSA-OAEP e SHA-256. Bob envia \(M1\), \(M2\) e o IV de \(M1\); Alice recupera a DEK com sua chave privada e então decifra \(M1\). O IV não é secreto, mas precisa acompanhar \(M1\). O servidor pode armazenar e encaminhar esses valores, mas não consegue recuperar a mensagem sem a chave privada de Alice.
 
 Bob precisa obter a chave pública de Alice por um meio confiável e validar que ela realmente pertence a Alice, por exemplo conferindo um certificado ou um fingerprint por canal independente. Cifrar a DEK com RSA-OAEP protege essa chave para Alice, mas não autentica Bob.
 
@@ -643,7 +643,7 @@ Alice usa KPrAlice para recuperar a DEK de M2 e, com essa DEK e o IV, decifra M1
 
 \textbf{Limites deste exemplo}
 
-AES-CBC fornece confidencialidade, mas não autentica nem detecta adulteração. O fluxo também não prova que Bob enviou a mensagem. Em produção, prefira uma cifra AEAD, como AES-GCM, e autentique Bob com uma assinatura digital ou um MAC apropriado. Os comandos com \texttt{openssl enc -K} são didáticos: a DEK aparece nos argumentos do processo e não deve ser manipulada dessa forma em produção.
+AES-CBC fornece confidencialidade, mas não integridade: alterações em \(M1\) ou no IV podem não ser detectadas e podem modificar o texto decifrado. O fluxo também não prova que Bob enviou a mensagem, e RSA-OAEP não autentica o remetente nem vincula o IV a \(M1\). Em produção, use um protocolo híbrido estabelecido que autentique o conteúdo e seus parâmetros, por exemplo com uma cifra AEAD como AES-GCM, garantindo um nonce único por chave; autentique Bob com uma assinatura digital verificada por uma chave pública confiável ou por um protocolo autenticado apropriado. A interface \texttt{openssl enc} usada neste exemplo não oferece cifras AEAD como AES-GCM, então não basta trocar o nome da cifra nos comandos. Os comandos com \texttt{openssl enc -K} são didáticos: a DEK aparece nos argumentos do processo e não deve ser manipulada dessa forma em produção.
 
 \pagebreak
 
@@ -652,12 +652,6 @@ AES-CBC fornece confidencialidade, mas não autentica nem detecta adulteração.
 \begin{flushright}
 	\underline{\textit{Copyright}}\\
 	All rights reserved to MT4 Tecnologia LTDA.\bigskip
-
-	\underline{\textit{Propósito deste documento}}\\
-	Conceitos de criptografia\bigskip
-
-	\underline{\textit{Versão}}\\
-	Versão 1.0\bigskip
 
 	\underline{\textit{Autor}}\\
 	Caio Abreu Ferreira [\href{mailto:cferreira@senhasegura.com}{cferreiras@senhasegura.com}] \bigskip\\

@@ -1,91 +1,96 @@
-<mxfile host="app.diagrams.net" version="26.1.0">
+<mxfile host="Electron">
   <diagram name="Page-1" id="hybrid-confidentiality">
-    <mxGraphModel grid="1" page="1" gridSize="10" pageScale="1" pageWidth="1450" pageHeight="570" math="0" shadow="0" background="#ffffff">
+    <mxGraphModel dx="1410" dy="842" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="570" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="bob_lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
-          <mxGeometry x="20" y="120" width="560" height="325" as="geometry" />
+        <mxCell id="bob_lane" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;" value="" vertex="1">
+          <mxGeometry height="325" width="560" x="20" y="120" as="geometry" />
         </mxCell>
-        <mxCell id="alice_lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
-          <mxGeometry x="800" y="120" width="600" height="325" as="geometry" />
+        <mxCell id="alice_lane" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;" value="" vertex="1">
+          <mxGeometry height="325" width="600" x="800" y="120" as="geometry" />
         </mxCell>
-        <mxCell id="bob_title" value="&lt;b&gt;Bob: cifragem&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=17;" vertex="1" parent="1">
-          <mxGeometry x="35" y="125" width="220" height="28" as="geometry" />
+        <mxCell id="bob_title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=17;" value="&lt;b&gt;Bob: cifragem&lt;/b&gt;" vertex="1">
+          <mxGeometry height="28" width="220" x="35" y="125" as="geometry" />
         </mxCell>
-        <mxCell id="alice_title" value="&lt;b&gt;Alice: decifragem&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=17;" vertex="1" parent="1">
-          <mxGeometry x="815" y="125" width="240" height="28" as="geometry" />
+        <mxCell id="alice_title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=17;" value="&lt;b&gt;Alice: decifragem&lt;/b&gt;" vertex="1">
+          <mxGeometry height="28" width="240" x="815" y="125" as="geometry" />
         </mxCell>
-        <mxCell id="bob_t" value="Texto plano&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="50" y="170" width="125" height="60" as="geometry" />
+        <mxCell id="bob_t" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Texto plano&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="125" x="50" y="170" as="geometry" />
         </mxCell>
-        <mxCell id="bob_dek" value="Chave aleatória&lt;br&gt;&lt;b&gt;DEKBob&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="50" y="300" width="145" height="60" as="geometry" />
+        <mxCell id="bob_dek" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Chave aleatória&lt;br&gt;&lt;b&gt;DEKBob&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="145" x="50" y="300" as="geometry" />
         </mxCell>
-        <mxCell id="enc_aes" value="Cifra simétrica&lt;br&gt;&lt;b&gt;AES-256-CBC&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="250" y="160" width="165" height="80" as="geometry" />
+        <mxCell id="enc_aes" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Cifra simétrica&lt;br&gt;&lt;b&gt;AES-256-CBC&lt;/b&gt;" vertex="1">
+          <mxGeometry height="80" width="165" x="250" y="160" as="geometry" />
         </mxCell>
-        <mxCell id="m1" value="Texto cifrado&lt;br&gt;&lt;b&gt;M1 + IV&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="465" y="170" width="100" height="60" as="geometry" />
+        <mxCell id="m1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Texto cifrado&lt;br&gt;&lt;b&gt;M1 + IV&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="100" x="465" y="170" as="geometry" />
         </mxCell>
-        <mxCell id="enc_rsa" value="Cifra da chave&lt;br&gt;&lt;b&gt;RSA-OAEP / SHA-256&lt;/b&gt;&lt;br&gt;KPuAlice validada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="240" y="290" width="175" height="90" as="geometry" />
+        <mxCell id="enc_rsa" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Cifra da chave&lt;br&gt;&lt;b&gt;RSA-OAEP / SHA-256&lt;/b&gt;&lt;br&gt;KPuAlice validada" vertex="1">
+          <mxGeometry height="90" width="175" x="240" y="290" as="geometry" />
         </mxCell>
-        <mxCell id="m2" value="Chave cifrada&lt;br&gt;&lt;b&gt;M2&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="465" y="305" width="100" height="60" as="geometry" />
+        <mxCell id="m2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Chave cifrada&lt;br&gt;&lt;b&gt;M2&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="100" x="465" y="305" as="geometry" />
         </mxCell>
-        <mxCell id="server" value="Canal / servidor&lt;br&gt;&lt;b&gt;Pacote: M1, M2, IV&lt;/b&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;" vertex="1" parent="1">
-          <mxGeometry x="620" y="230" width="160" height="100" as="geometry" />
+        <mxCell id="server" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;" value="Canal / servidor&lt;br&gt;&lt;b&gt;Pacote: M1, M2, IV&lt;/b&gt;" vertex="1">
+          <mxGeometry height="100" width="160" x="620" y="230" as="geometry" />
         </mxCell>
-        <mxCell id="alice_priv" value="Chave privada de Alice&lt;br&gt;&lt;b&gt;KPrAlice&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="835" y="155" width="175" height="60" as="geometry" />
+        <mxCell id="alice_priv" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Chave privada de Alice&lt;br&gt;&lt;b&gt;KPrAlice&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="175" x="835" y="155" as="geometry" />
         </mxCell>
-        <mxCell id="dec_rsa" value="Recupera a chave&lt;br&gt;&lt;b&gt;RSA-OAEP&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="835" y="260" width="175" height="80" as="geometry" />
+        <mxCell id="dec_rsa" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Recupera a chave&lt;br&gt;&lt;b&gt;RSA-OAEP&lt;/b&gt;" vertex="1">
+          <mxGeometry height="80" width="175" x="835" y="260" as="geometry" />
         </mxCell>
-        <mxCell id="dek_recv" value="Chave recuperada&lt;br&gt;&lt;b&gt;DEKBob&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1060" y="265" width="135" height="60" as="geometry" />
+        <mxCell id="dek_recv" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Chave recuperada&lt;br&gt;&lt;b&gt;DEKBob&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="135" x="1060" y="265" as="geometry" />
         </mxCell>
-        <mxCell id="dec_aes" value="Decifra M1&lt;br&gt;&lt;b&gt;AES-256-CBC&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1060" y="370" width="165" height="75" as="geometry" />
+        <mxCell id="dec_aes" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Decifra M1&lt;br&gt;&lt;b&gt;AES-256-CBC&lt;/b&gt;" vertex="1">
+          <mxGeometry height="75" width="165" x="1060" y="370" as="geometry" />
         </mxCell>
-        <mxCell id="plain" value="Texto plano&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1280" y="378" width="95" height="60" as="geometry" />
+        <mxCell id="plain" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Texto plano&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="95" x="1280" y="378" as="geometry" />
         </mxCell>
-        <mxCell id="warning" value="Fluxo de confidencialidade: não autentica Bob. AES-CBC não detecta adulteração. Use AEAD e valide a autenticidade de KPuAlice; para identificar o remetente, acrescente assinatura digital ou MAC." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="55" y="475" width="1320" height="65" as="geometry" />
+        <mxCell id="warning" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" value="Fluxo de confidencialidade: não autentica Bob. AES-CBC não detecta adulteração. Use AEAD e valide a autenticidade de KPuAlice; para identificar o remetente, acrescente assinatura digital ou MAC." vertex="1">
+          <mxGeometry height="65" width="1320" x="55" y="475" as="geometry" />
         </mxCell>
-        <mxCell id="t_to_aes" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="bob_t" target="enc_aes">
+        <mxCell id="t_to_aes" edge="1" parent="1" source="bob_t" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="enc_aes" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="dek_to_aes" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="bob_dek" target="enc_aes">
+        <mxCell id="dek_to_aes" edge="1" parent="1" source="bob_dek" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="enc_aes" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="122.5" y="270" />
+              <mxPoint x="332.5" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dek_to_rsa" edge="1" parent="1" source="bob_dek" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="enc_rsa" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="dek_to_rsa" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="bob_dek" target="enc_rsa">
+        <mxCell id="aes_to_m1" edge="1" parent="1" source="enc_aes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="m1" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="aes_to_m1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="enc_aes" target="m1">
+        <mxCell id="rsa_to_m2" edge="1" parent="1" source="enc_rsa" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="m2" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rsa_to_m2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="enc_rsa" target="m2">
+        <mxCell id="m1_to_server" edge="1" parent="1" source="m1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="server" value="M1 + IV">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="m1_to_server" value="M1 + IV" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="m1" target="server">
+        <mxCell id="m2_to_server" edge="1" parent="1" source="m2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="server" value="M2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="m2_to_server" value="M2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="m2" target="server">
+        <mxCell id="server_to_rsa" edge="1" parent="1" source="server" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="dec_rsa" value="M2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="server_to_rsa" value="M2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="server" target="dec_rsa">
+        <mxCell id="private_to_rsa" edge="1" parent="1" source="alice_priv" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="dec_rsa" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="private_to_rsa" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="alice_priv" target="dec_rsa">
+        <mxCell id="rsa_to_dek" edge="1" parent="1" source="dec_rsa" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="dek_recv" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rsa_to_dek" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="dec_rsa" target="dek_recv">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="server_to_aes" value="M1 + IV" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;exitX=1;exitY=0.8;entryX=0.5;entryY=1;" edge="1" parent="1" source="server" target="dec_aes">
+        <mxCell id="server_to_aes" edge="1" parent="1" source="server" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;exitX=1;exitY=0.8;entryX=0.5;entryY=1;" target="dec_aes" value="M1 + IV">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="790" y="310" />
@@ -94,10 +99,10 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="dek_to_dec_aes" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="dek_recv" target="dec_aes">
+        <mxCell id="dek_to_dec_aes" edge="1" parent="1" source="dek_recv" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="dec_aes" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="aes_to_plain" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="dec_aes" target="plain">
+        <mxCell id="aes_to_plain" edge="1" parent="1" source="dec_aes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" target="plain" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
