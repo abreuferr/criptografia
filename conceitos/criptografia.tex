@@ -487,73 +487,70 @@ A Autenticidade está relacionada à verificação da identidade das partes envo
 
 \subsection{Assinatura Digital}
 
-A assinatura digital é um mecanismo de segurança criptográfica fundamental para garantir a integridade e a autenticidade das informações transmitidas digitalmente.\\
+Uma assinatura digital permite verificar se uma mensagem corresponde a uma assinatura produzida com a chave privada associada à chave pública usada na verificação. Ela ajuda a detectar alterações na mensagem e a autenticar a origem da assinatura, desde que a chave pública esteja autenticada. A assinatura digital não cifra a mensagem nem fornece confidencialidade.
 
-\textbf{Conceito de Assinatura Digital}\\
+\textbf{Funcionamento}
 
-A assinatura digital utiliza algoritmos de \textbf{criptografia assimétrica} para garantir que uma mensagem ou documento não tenha sido alterado desde que foi assinado e que realmente foi enviado pelo remetente.\\
+Bob calcula uma assinatura \(\sigma=\mathrm{Sign}(KPrBob,T)\) sobre a mensagem \(T\) e envia a mensagem junto com \(\sigma\). Na prática, algoritmos de assinatura costumam aplicar internamente uma função de hash; isso não significa que o resumo seja simplesmente cifrado com a chave privada. Alice verifica a assinatura com \(\mathrm{Verify}(KPuBob,T,\sigma)\), que retorna válida ou inválida.
 
-\textbf{Funcionamento}\\
-
-A Figura \ref{fig:assinatura} exemplifica o algoritmo de assinatura digital. Neste exemplo, Bob deseja enviar uma menagem para Alice e Bob deseja garantir que Alice possa verificar a autenticidade da mensagem.
+A Figura \ref{fig:assinatura} mostra esse fluxo. Alice precisa obter uma chave pública que esteja de fato associada a Bob, por exemplo validando a cadeia de certificados ou conferindo o fingerprint por um canal independente. Sem essa validação, um atacante poderia substituir a chave pública por outra e fazer Alice aceitar uma assinatura sob a chave errada. Uma verificação válida confirma a correspondência entre mensagem, assinatura e chave pública; a atribuição da identidade de Bob depende da confiança nessa chave.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.45]{assinatura.png}
-	\caption{Funcionamento do processo de Assinatura Digital}
+	\includegraphics[scale=0.55]{assinatura.png}
+	\caption{Bob assina uma mensagem e Alice verifica a assinatura com a chave pública autenticada}
 	\label{fig:assinatura}
 \end{figure}
 
 \begin{enumerate}
-	\item \textbf{Criação de Chaves:}
-	Bob, que deseja enviar uma mensagem assinada para Alice, primeiro cria um par de chaves criptográficas: uma chave pública(KPuBob) e uma chave privada(KPrBob);
+	\item \textbf{Criação do par de chaves:}
+	Bob gera uma chave privada RSA e extrai dela a chave pública correspondente. A chave privada deve permanecer sob o controle de Bob; a chave pública deve ser autenticada antes de Alice confiar nela.
 	\begin{tcolorbox}[width=\textwidth]
-		{\small
-			\begin{verbatim}
-			$ openssl genpkey -algorithm RSA -out KPrBob.pem -pkeyopt rsa_keygen_bits:2048
-			$ openssl rsa -pubout -in KPrBob.pem -out KPuBob.pem
-			\end{verbatim}
-		}
+	{\small
+		\begin{verbatim}
+		$ umask 077
+		$ openssl genpkey -algorithm RSA -out KPrBob.pem -pkeyopt rsa_keygen_bits:3072
+		$ openssl pkey -in KPrBob.pem -pubout -out KPuBob.pem
+		\end{verbatim}
+	}
 	\end{tcolorbox}
-	\item \textbf{Assinatura da Mensagem:}
-	Bob escreve sua mensagem e, em seguida, utiliza sua chave privada para gerar uma assinatura digital. Este processo envolve a aplicação de uma função de hash na mensagem para gerar um resumo da mesma (digest). Em seguida, Bob criptografa este resumo utilizando sua chave privada. O resultado é a assinatura digital, que é enviada juntamente com a mensagem original para Alice.
+
+	\item \textbf{Assinatura da mensagem:}
+	Bob assina os bytes de \texttt{arquivo.txt} com RSA-PSS e SHA-256. Ele envia o arquivo original e \texttt{signature.bin} para Alice.
 	\begin{tcolorbox}[width=\textwidth]
-		{\small
-			\begin{verbatim}
-			$ openssl dgst -sha256 -sign KPrBob.pem -out signature.bin arquivo.txt
-			\end{verbatim}
-		}
+	{\small
+		\begin{verbatim}
+		$ openssl dgst -sha256 -sign KPrBob.pem \
+		  -sigopt rsa_padding_mode:pss \
+		  -sigopt rsa_pss_saltlen:digest \
+		  -out signature.bin arquivo.txt
+		\end{verbatim}
+	}
 	\end{tcolorbox}
-	\item \textbf{Verificação da Assinatura:}
-	Ao receber a mensagem e a assinatura digital, Alice utiliza a chave pública de Bob para verificar a assinatura. Primeiro, ela aplica a mesma função de hash na mensagem recebida para gerar um resumo. Depois, ela utiliza a chave pública de Bob para descriptografar a assinatura digital recebida, obtendo o resumo original da mensagem assinado por Bob.
-		\begin{itemize}
-			\item Se o resumo gerado por Alice e o resumo obtido através da descriptografia da assinatura coincidirem, Alice pode ter certeza de que a mensagem não foi alterada e foi realmente assinada por Bob.
-			\item Se os resumos não coincidirem, isso indica que a mensagem foi alterada no caminho ou que a assinatura não foi gerada pela chave privada de Bob.
-		\end{itemize}
+
+	\item \textbf{Verificação da assinatura:}
+	Alice verifica a assinatura sobre a cópia recebida de \texttt{arquivo.txt}, usando a chave pública autenticada de Bob e os mesmos parâmetros RSA-PSS.
 	\begin{tcolorbox}[width=\textwidth]
-		{\small
-			\begin{verbatim}
-			$ openssl dgst -sha256 -verify KPuBob.pem -signature signature.bin arquivo.txt
-			Verified OK
-			\end{verbatim}
-		}
+	{\small
+		\begin{verbatim}
+		$ openssl dgst -sha256 -verify KPuBob.pem \
+		  -sigopt rsa_padding_mode:pss \
+		  -sigopt rsa_pss_saltlen:digest \
+		  -signature signature.bin arquivo.txt
+		Verified OK
+		\end{verbatim}
+	}
 	\end{tcolorbox}
+	Uma verificação bem-sucedida indica que a assinatura corresponde ao arquivo e à chave pública fornecidos. Se a mensagem ou a assinatura tiver sido alterada, ou se for usada outra chave pública, a verificação falha.
 \end{enumerate}
 
-\textbf{Importância da Assinatura Digital}\\
-
-A assinatura digital proporciona dois aspectos cruciais de segurança:
+\textbf{O que a assinatura garante}
 
 \begin{itemize}
-	\item \textbf{Autenticidade:} Garante que a mensagem foi enviada pelo remetente legítimo (no caso, Bob).
-	\item \textbf{Integridade:} Assegura que a mensagem não foi alterada durante a transmissão.
+	\item \textbf{Integridade:} permite detectar alterações nos dados assinados.
+	\item \textbf{Autenticidade da chave:} confirma que a assinatura corresponde à chave privada associada à chave pública usada; associar essa chave a Bob exige autenticar a chave pública.
+	\item \textbf{Sem confidencialidade:} qualquer pessoa que obtenha a mensagem pode lê-la; para ocultar seu conteúdo, é necessário cifrá-la separadamente.
 \end{itemize}
-
-Em conjunto, esses aspectos permitem a confiança em comunicações eletrônicas, especialmente em transações financeiras, documentos legais e comunicação corporativa.\\
-
-\textbf{Conclusão}\\
-
-A assinatura digital é um componente vital na segurança da informação, oferecendo uma maneira robusta de verificar a integridade e a autenticidade de dados digitais. No exemplo de Bob e Alice, vimos como a criptografia assimétrica é utilizada para gerar e verificar assinaturas digitais, garantindo a segurança nas comunicações digitais.
 
 \pagebreak
 

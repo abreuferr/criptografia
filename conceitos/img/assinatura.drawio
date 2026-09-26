@@ -1,188 +1,71 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.1.0">
-  <diagram name="Page-1" id="E5jWf1-1fmrZasVms1gN">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<mxfile host="app.diagrams.net" version="26.1.0">
+  <diagram name="Page-1" id="digital-signature-flow">
+    <mxGraphModel grid="1" page="1" gridSize="10" pageScale="1" pageWidth="1250" pageHeight="500" math="0" shadow="0" background="#ffffff">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="VYpes3dm9Cd_ZOX70XXP-8" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Bob&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="720.11" y="190" width="60" height="30" as="geometry" />
+        <mxCell id="bob_lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="500" height="340" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-1" value="" style="image;html=1;image=img/lib/clip_art/people/Suit_Woman_128x128.png" vertex="1" parent="1">
-          <mxGeometry x="43.5" y="715" width="80" height="80" as="geometry" />
+        <mxCell id="alice_lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#777777;strokeWidth=1;dashed=1;dashPattern=6 4;fontColor=#222222;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="560" y="20" width="650" height="340" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-2" value="" style="image;html=1;image=img/lib/clip_art/people/Suit_Man_128x128.png" vertex="1" parent="1">
-          <mxGeometry x="710.11" y="220" width="80" height="80" as="geometry" />
+        <mxCell id="bob_label" value="&lt;b&gt;Bob&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="35" y="30" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-3" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Chave Pública&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="123.5" y="300" width="166.5" height="90" as="geometry" />
+        <mxCell id="alice_label" value="&lt;b&gt;Alice&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontColor=#111111;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="575" y="30" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-4" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;KPuAlice&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-3">
-          <mxGeometry y="50" width="166.5" height="40" as="geometry" />
+        <mxCell id="message" value="Mensagem&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="75" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-5" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Chave Privada&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="117.11" y="130" width="162.89" height="90" as="geometry" />
+        <mxCell id="sign" value="Assina a mensagem&lt;br&gt;&lt;b&gt;σ = Sign(KPrBob, T)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="280" y="135" width="200" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-6" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;KPrAlice&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-5">
-          <mxGeometry y="50" width="162.89" height="40" as="geometry" />
+        <mxCell id="private" value="Chave privada de Bob&lt;br&gt;&lt;b&gt;KPrBob&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="280" y="260" width="200" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-7" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Chave Pública&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="500" y="300" width="160" height="90" as="geometry" />
+        <mxCell id="received_t" value="Mensagem recebida&lt;br&gt;&lt;b&gt;T&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="600" y="75" width="145" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-8" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;KPuBob&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-7">
-          <mxGeometry y="50" width="160" height="40" as="geometry" />
+        <mxCell id="received_sig" value="Assinatura recebida&lt;br&gt;&lt;b&gt;σ&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="600" y="190" width="145" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-9" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Chave Privada&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="500" y="120" width="150" height="90" as="geometry" />
+        <mxCell id="verify" value="Verifica assinatura&lt;br&gt;&lt;b&gt;Verify(KPuBob, T, σ)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="810" y="115" width="190" height="115" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-10" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;KPrBob&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-9">
-          <mxGeometry y="50" width="150" height="40" as="geometry" />
+        <mxCell id="public" value="Chave pública de Bob&lt;br&gt;&lt;b&gt;KPuBob autenticada&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#222222;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="810" y="275" width="190" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-18" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="370" y="460" width="60" height="80" as="geometry" />
+        <mxCell id="result" value="Resultado&lt;br&gt;&lt;b&gt;Válida / Inválida&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5e1;strokeColor=#228b22;strokeWidth=2;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="145" width="145" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-19" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Alice&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="123.5" y="740" width="60" height="30" as="geometry" />
+        <mxCell id="note" value="A assinatura não cifra a mensagem. Para associar KPuBob a Bob, Alice precisa confiar na chave pública (por exemplo, validar certificado ou fingerprint)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontColor=#111111;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="80" y="395" width="1100" height="65" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-20" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Bob&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="670" y="740" width="60" height="30" as="geometry" />
+        <mxCell id="e_message_sign" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="message" target="sign">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-22" value="" style="image;html=1;image=img/lib/clip_art/people/Suit_Man_128x128.png" vertex="1" parent="1">
-          <mxGeometry x="730" y="715" width="80" height="80" as="geometry" />
+        <mxCell id="e_private_sign" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="private" target="sign">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-24" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Chave Privada&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="595" width="170" height="90" as="geometry" />
+        <mxCell id="e_message_send" value="Mensagem T" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="message" target="received_t">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-25" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;KPrAlice&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-24">
-          <mxGeometry y="50" width="170" height="40" as="geometry" />
+        <mxCell id="e_signature_send" value="Assinatura σ" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="sign" target="received_sig">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-28" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Texto Plano&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="845" width="170" height="90" as="geometry" />
+        <mxCell id="e_t_verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="received_t" target="verify">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-29" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;T&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-28">
-          <mxGeometry y="50" width="170" height="40" as="geometry" />
+        <mxCell id="e_sig_verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="received_sig" target="verify">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-30" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Criptografia&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="230.61" y="705" width="169.39" height="90" as="geometry" />
+        <mxCell id="e_key_verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="public" target="verify">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-31" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;C(T,KPrAlice) =&amp;nbsp;&lt;/font&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;M&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-30">
-          <mxGeometry y="50" width="169.39" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-35" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;M&lt;/font&gt;&lt;/b&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-31" target="qyIP-Cw33SO6Rq5nXXRo-36">
-          <mxGeometry width="80" relative="1" as="geometry">
-            <mxPoint x="440.11" y="765" as="sourcePoint" />
-            <mxPoint x="520.11" y="765" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-36" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Descriptografia&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="473.86" y="705" width="166.14" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-37" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;D(M,KPuAlice) =&amp;nbsp;&lt;/font&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;T&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-36">
-          <mxGeometry y="50" width="166.14" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-38" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Texto Plano&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="660" y="825" width="159.89" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-39" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;T&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-38">
-          <mxGeometry y="50" width="159.89" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-47" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-37" target="qyIP-Cw33SO6Rq5nXXRo-38">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="670" y="785" as="sourcePoint" />
-            <mxPoint x="810.11" y="585" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-52" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Chave Pública (Alice)&lt;/font&gt;&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="660" y="605" width="159.89" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-53" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;KPuAlice&lt;/font&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="qyIP-Cw33SO6Rq5nXXRo-52">
-          <mxGeometry y="50" width="159.89" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-54" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-52" target="qyIP-Cw33SO6Rq5nXXRo-37">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="480" y="535" as="sourcePoint" />
-            <mxPoint x="670" y="765" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-55" value="" style="image;html=1;image=img/lib/clip_art/people/Suit_Woman_128x128.png" vertex="1" parent="1">
-          <mxGeometry x="-10" y="235" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="qyIP-Cw33SO6Rq5nXXRo-56" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Alice&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry y="205" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="bJJzQCX89kcSYCD6Rm3S-1" value="&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;(1)&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="43.5" y="260" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="bJJzQCX89kcSYCD6Rm3S-4" value="&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;(2)&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="670" y="250" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="bJJzQCX89kcSYCD6Rm3S-5" value="&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;(4)&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="230.61" y="805" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="bJJzQCX89kcSYCD6Rm3S-6" value="&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;(5)&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="473.86" y="795" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="g7tfc9zZaOWU4_pzTB4W-2" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-55" target="qyIP-Cw33SO6Rq5nXXRo-6">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="470" y="350" as="sourcePoint" />
-            <mxPoint x="520" y="300" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="g7tfc9zZaOWU4_pzTB4W-3" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-55" target="qyIP-Cw33SO6Rq5nXXRo-3">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="340" y="320" as="sourcePoint" />
-            <mxPoint x="390" y="270" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="g7tfc9zZaOWU4_pzTB4W-4" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-2" target="qyIP-Cw33SO6Rq5nXXRo-10">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="740" y="170" as="sourcePoint" />
-            <mxPoint x="790" y="120" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="g7tfc9zZaOWU4_pzTB4W-5" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-2" target="qyIP-Cw33SO6Rq5nXXRo-8">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="750" y="400" as="sourcePoint" />
-            <mxPoint x="800" y="350" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="g7tfc9zZaOWU4_pzTB4W-6" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;KPuAlice&lt;/font&gt;&lt;/b&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-4" target="qyIP-Cw33SO6Rq5nXXRo-18">
-          <mxGeometry width="80" relative="1" as="geometry">
-            <mxPoint x="230" y="450" as="sourcePoint" />
-            <mxPoint x="310" y="450" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="g7tfc9zZaOWU4_pzTB4W-7" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;KPuBob&lt;/font&gt;&lt;/b&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-7" target="qyIP-Cw33SO6Rq5nXXRo-18">
-          <mxGeometry width="80" relative="1" as="geometry">
-            <mxPoint x="630" y="460" as="sourcePoint" />
-            <mxPoint x="710" y="460" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="g7tfc9zZaOWU4_pzTB4W-8" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;KPuAlice&lt;/font&gt;&lt;/b&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=0.145;exitY=1;exitDx=0;exitDy=-4.35;exitPerimeter=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-18">
-          <mxGeometry width="80" relative="1" as="geometry">
-            <mxPoint x="370" y="560" as="sourcePoint" />
-            <mxPoint x="660" y="665" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="g7tfc9zZaOWU4_pzTB4W-9" value="&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;(3)&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="370" y="440" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="dlTEJ2fKHJRM2dWNOK22-1" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;KPuBob&lt;/font&gt;&lt;/b&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-25" target="qyIP-Cw33SO6Rq5nXXRo-31">
-          <mxGeometry width="80" relative="1" as="geometry">
-            <mxPoint x="290" y="915" as="sourcePoint" />
-            <mxPoint x="370" y="915" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="dlTEJ2fKHJRM2dWNOK22-2" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;T&lt;/font&gt;&lt;/b&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="qyIP-Cw33SO6Rq5nXXRo-29" target="qyIP-Cw33SO6Rq5nXXRo-31">
-          <mxGeometry width="80" relative="1" as="geometry">
-            <mxPoint x="167" y="683" as="sourcePoint" />
-            <mxPoint x="241" y="778" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="c2TPJ2fev4IFX6HwPoEl-2" value="" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;strokeColor=default;fillColor=none;strokeWidth=3;" vertex="1" parent="1">
-          <mxGeometry x="-20" y="80" width="830" height="370" as="geometry" />
-        </mxCell>
-        <mxCell id="c2TPJ2fev4IFX6HwPoEl-4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeWidth=3;" vertex="1" parent="1">
-          <mxGeometry y="547.5" width="830" height="415" as="geometry" />
+        <mxCell id="e_result" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=2;endArrow=classic;endFill=1;fontColor=#111111;fontSize=13;" edge="1" parent="1" source="verify" target="result">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
