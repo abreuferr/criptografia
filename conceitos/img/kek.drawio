@@ -51,7 +51,7 @@
           <mxGeometry x="780" y="100" width="60" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ok_ecK9jfTpKp91j3VRe-30" value="&lt;b&gt;&lt;font style=&quot;font-size:14px;&quot;&gt;Bob&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=none;strokeColor=none;strokeWidth=2;fontColor=#111111;fontFamily=Helvetica;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="19" y="160" width="60" height="30" as="geometry" />
+          <mxGeometry x="19.0" y="105.0" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="SO-o28mJTSLYFlBwtEdL-2" value="&lt;b&gt;&lt;font style=&quot;font-size:14px;&quot;&gt;(1)&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=none;strokeColor=none;strokeWidth=2;fontColor=#111111;fontFamily=Helvetica;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="89" y="220" width="60" height="30" as="geometry" />
@@ -275,10 +275,7 @@
         <mxCell id="kek-implementation-note" value="&lt;span style=&quot;font-size:14px;&quot;&gt;Detalhes omitidos: associe IV/nonce e autenticação a M1/M2 (tag AEAD ou MAC com chave independente); valide antes de decifrar.&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontColor=#111111;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="20" y="1040" width="1020" height="55" as="geometry" />
         </mxCell>
-      <mxCell id="ok_ecK9jfTpKp91j3VRe-14" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#555555;shape=mxgraph.azure.user;" vertex="1" parent="1">
-          <mxGeometry x="9" y="80" width="80" height="80" as="geometry" />
-        </mxCell>
-        </root>
+      </root>
     </mxGraphModel>
   </diagram>
 </mxfile>
