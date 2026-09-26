@@ -367,23 +367,18 @@ Uma KEK protege chaves de dados e ajuda a separar a gestão de chaves da cifrage
 
 \subsection{Key Derivation Functions (KDF)}
 
-As funções de derivação de chaves (Key Derivation Functions - KDF) são um componente essencial na segurança e criptografia de dados. Estas funções são utilizadas para transformar um segredo inicial, como uma senha ou uma chave de criptografia, em uma ou mais chaves criptográficas que podem ser usadas para cifrar dados ou autenticar mensagens.\\
+As funções de derivação de chaves (Key Derivation Functions -- KDFs) transformam um segredo inicial, como uma senha, em uma ou mais chaves criptográficas de tamanho definido. A Figura \ref{fig:kdf} ilustra a derivação de uma chave a partir de uma Senha Mestra. A derivação também depende de um salt e de parâmetros que controlam o custo da operação.
 
-O processo de derivação de chave geralmente envolve a aplicação de uma função matemática que transforma a entrada original em uma chave na saída. A Figura \ref{fig:kdf} exemplifica o processo de derivação da Senha Mestra em uma Chave Mestra. Esta transformação é feita para garantir que a chave resultante seja segura e apropriada para uso em operações criptográficas. Os KDFs são projetados para serem resistentes a ataques, como ataques de força bruta, onde um atacante tenta todas as combinações possíveis até encontrar a correta.
+O salt deve ser único para cada derivação e pode ser armazenado junto aos dados e aos parâmetros da KDF; ele não precisa ser secreto. Seu uso evita que senhas iguais produzam necessariamente a mesma chave e dificulta o pré-cálculo de tabelas. Uma KDF apropriada para senhas aumenta o custo de cada tentativa de adivinhação, mas não elimina ataques de força bruta nem compensa uma senha fraca.
+
+Um exemplo é PBKDF2 (Password-Based Key Derivation Function 2), especificada no PKCS \#5. Ela aplica uma função pseudorrandômica, como HMAC-SHA-256, repetidamente; o número de iterações é um de seus parâmetros de custo. Argon2, selecionada na Password Hashing Competition, é outra opção e permite configurar parâmetros como memória, tempo e paralelismo. Os parâmetros utilizados devem ser armazenados para possibilitar a derivação posterior da mesma chave e escolhidos conforme as recomendações atuais e os recursos disponíveis.
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.45]{kdf.png}
-	\caption{Funcionamento do conceito Key Derivation Functions (KDF)}
-	\label{fig:kdf}
+\centering
+\includegraphics[scale=0.45]{kdf.png}
+\caption{Derivação de chave a partir de uma senha, salt e parâmetros da KDF}
+\label{fig:kdf}
 \end{figure}
-
-Um exemplo comum de KDF é a função PBKDF2 (Password-Based Key Derivation Function 2), definida no padrão PKCS \#5. O PBKDF2 usa um algoritmo de hash criptográfico, como SHA-256, e um determinado número de iterações para transformar a senha inicial em uma chave derivada. O processo de iteração aumenta a dificuldade de ataques de força bruta, pois cada tentativa de senha requer várias operações de hash.\\
-
-Além de PBKDF2, há também Argon2, uma KDF moderna que ganhou o Password Hashing Competition (PHC) em 2015. Argon2 é altamente configurável, permitindo ajustes precisos em termos de memória, tempo de processamento e paralelismo, oferecendo um equilíbrio entre segurança e performance.\\
-
-O uso de KDFs é essencial em sistemas onde a segurança da chave criptográfica é crucial. Sem um KDF adequado, as chaves derivadas podem ser vulneráveis a diversos tipos de ataques, comprometendo a integridade e confidencialidade dos dados. Portanto, a escolha e implementação corretas de uma KDF robusta são fundamentais para a segurança criptográfica eficaz.\\
-
 Abaixo estão exemplos de comandos que utilizam o OpenSSL para realizar o processo de Key Derivation Functions (KDF), que é usado para derivar uma chave criptográfica a partir de uma senha ou outra informação inicial.
 
 \begin{enumerate}
