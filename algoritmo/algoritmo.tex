@@ -90,10 +90,14 @@
 
 \subsection{Chave Simétrica}
 	\begin{itemize}
-		\item Algoritmo - AES-CBC
-		\item Tamanho da chave - 256 bits
-		\item Recomendação - \href{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf}{FIPS PUB 197} (Federal Information Processing Standards Publication 197)
+		\item Algoritmo - AES (Advanced Encryption Standard), com chave de 256 bits;
+		\item Modo recomendado - GCM, uma cifra autenticada (AEAD) que protege a confidencialidade e permite detectar alterações no texto cifrado;
+		\item Nonce - preferencialmente 96 bits e nunca reutilizado com a mesma chave;
+		\item Tag de autenticação - 128 bits;
+		\item Referências - \href{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf}{FIPS PUB 197} (AES) e \href{https://csrc.nist.gov/pubs/sp/800/38/d/final}{NIST SP 800-38D} (GCM).
 	\end{itemize}
+
+O modo CBC pode ser necessário para compatibilidade com sistemas legados, mas fornece apenas confidencialidade. Nesse caso, use um IV imprevisível e autentique o IV e o texto cifrado com um MAC, usando uma chave independente; verifique o MAC antes de decifrar.
 
 \subsection{Chave Assimétrica}
 	\begin{itemize}

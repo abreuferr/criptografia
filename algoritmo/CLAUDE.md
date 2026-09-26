@@ -6,7 +6,7 @@ parâmetros de KDF). Ver também pontos transversais em `../CLAUDE.md`.
 
 ## Conteúdo atual
 
-- Chave simétrica: AES-CBC, 256 bits (FIPS PUB 197).
+- Chave simétrica: AES-256-GCM recomendado (FIPS PUB 197 e NIST SP 800-38D), nonce preferencialmente de 96 bits nunca repetido com a mesma chave e tag de 128 bits. AES-CBC é legado e requer IV imprevisível mais MAC com chave independente.
 - Chave assimétrica: RSA, mínimo 2048 bits (NIST SP 800-57 Part 1).
 - Hash: SHA-2 (SHA-256/384/512).
 - HMAC: SHA-2 (SHA-256/384/512).
@@ -21,6 +21,3 @@ Compila limpo (verificado com `pdflatex`, 6 páginas, sem erro).
 - Nas seções Hash e HMAC, o rótulo é "Tamanho da chave" — hash não tem
   chave. Trocar por "Tamanho da saída do hash" na seção Hash; na seção
   HMAC, diferenciar "tamanho da chave" de "tamanho da tag".
-- AES-CBC é recomendado sem menção a autenticação (MAC/AEAD). Alinhar com
-  a ressalva já usada em `conceitos.tex`/`custodia.tex` sobre CBC puro não
-  detectar adulteração.
