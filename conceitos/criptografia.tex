@@ -263,7 +263,7 @@ A Figura \ref{fig:kek} ilustra a hierarquia de chaves: M1 é a DEK protegida pel
 	\label{fig:kek}
 \end{figure}
 
-\textbf{Nota sobre os comandos:} são exemplos didáticos e usam AES-CBC sem autenticação. Em produção, prefira AEAD para proteger M1 e M2; se CBC for necessário, use um MAC com chave independente que cubra o IV e o texto cifrado, e verifique-o antes de decifrar. Armazene com M1 seu IV, o salt e os parâmetros da KDF; armazene com M2 seu IV. A cópia de M1 permite tentativas offline de adivinhar a Senha Mestra, portanto a KDF não substitui uma senha forte. Os comandos gravam chaves em arquivos e passam valores secretos em argumentos de processo; não devem ser usados assim em produção.
+\textbf{Nota sobre os comandos:} são exemplos didáticos e usam AES-CBC sem autenticação. Em produção, prefira AEAD para proteger M1 e M2; se CBC for necessário, use um MAC com chave independente que cubra o IV e o texto cifrado, e verifique-o antes de decifrar. Armazene com M1 seu IV, o salt e os parâmetros da KDF; armazene com M2 seu IV. A cópia de M1 permite tentativas offline de adivinhar a Senha Mestra, portanto a KDF não substitui uma senha forte. Os exemplos são didáticos e gravam material secreto em arquivos locais. Os comandos AES-CBC abaixo também passam a chave em argumentos de processo; não os use assim em produção.
 
 \textbf{- Criptografar a Chave de Dados(DEKBob)}
 
@@ -282,12 +282,17 @@ A Figura \ref{fig:kek} ilustra a hierarquia de chaves: M1 é a DEK protegida pel
 	\begin{tcolorbox}[width=\textwidth]
 		{\footnotesize
 			\begin{verbatim}
-			$ read -rs MASTER_PASSWORD
-			$ SALT_HEX=$(openssl rand -hex 16)
-			$ printf '%s' "$SALT_HEX" > MKBob.salt
-			$ openssl kdf -keylen 32 -kdfopt digest:SHA256 \
-			  -kdfopt pass:"$MASTER_PASSWORD" -kdfopt salt:"$SALT_HEX" \
-			  -kdfopt iter:600000 PBKDF2 | tr -d ':\n' > MKBob.hex
+			$ python3 -c 'import getpass, hashlib, os, secrets; from pathlib import Path
+os.umask(0o077)
+password = getpass.getpass("Senha Mestra: ").encode("utf-8")
+salt_file = Path("MKBob.salt")
+salt = bytes.fromhex(salt_file.read_text().strip()) if salt_file.exists() else secrets.token_bytes(16)
+if len(salt) != 16: raise ValueError("O salt deve ter 16 bytes")
+key = hashlib.pbkdf2_hmac("sha256", password, salt, 600000, dklen=32)
+if not salt_file.exists(): salt_file.write_text(salt.hex() + "\n")
+Path("MKBob.hex").write_text(key.hex() + "\n")
+Path("MKBob.kdf").write_text("PBKDF2-HMAC-SHA-256\niterations=600000\nkey_length=32\n")
+os.chmod("MKBob.salt", 0o600); os.chmod("MKBob.hex", 0o600); os.chmod("MKBob.kdf", 0o600)'
 			\end{verbatim}
 		}
 	\end{tcolorbox}
@@ -379,19 +384,24 @@ Um exemplo é PBKDF2 (Password-Based Key Derivation Function 2), especificada no
 \caption{Derivação de chave a partir de uma senha, salt e parâmetros da KDF}
 \label{fig:kdf}
 \end{figure}
-Abaixo estão exemplos de comandos que utilizam o OpenSSL para realizar o processo de Key Derivation Functions (KDF), que é usado para derivar uma chave criptográfica a partir de uma senha ou outra informação inicial.
+O exemplo a seguir usa Python e sua biblioteca padrão para derivar uma chave com PBKDF2-HMAC-SHA-256. Na primeira execução, gera e salva um salt aleatório; nas seguintes, reutiliza o salt salvo para derivar novamente a mesma chave. O arquivo MKBob.kdf registra algoritmo, iterações e tamanho da chave.
 
 \begin{enumerate}
 	\item Derivar uma chave de 256 bits usando PBKDF2 e salvar sua representação hexadecimal localmente. O salt é armazenado junto dos metadados necessários à derivação.
 	\begin{tcolorbox}[width=\textwidth]
 	{\footnotesize
 		\begin{verbatim}
-			$ read -rs MASTER_PASSWORD
-			$ SALT_HEX=$(openssl rand -hex 16)
-			$ printf '%s' "$SALT_HEX" > MKBob.salt
-			$ openssl kdf -keylen 32 -kdfopt digest:SHA256 \
-			  -kdfopt pass:"$MASTER_PASSWORD" -kdfopt salt:"$SALT_HEX" \
-			  -kdfopt iter:600000 PBKDF2 | tr -d ':\n' > MKBob.hex
+			$ python3 -c 'import getpass, hashlib, os, secrets; from pathlib import Path
+os.umask(0o077)
+password = getpass.getpass("Senha Mestra: ").encode("utf-8")
+salt_file = Path("MKBob.salt")
+salt = bytes.fromhex(salt_file.read_text().strip()) if salt_file.exists() else secrets.token_bytes(16)
+if len(salt) != 16: raise ValueError("O salt deve ter 16 bytes")
+key = hashlib.pbkdf2_hmac("sha256", password, salt, 600000, dklen=32)
+if not salt_file.exists(): salt_file.write_text(salt.hex() + "\n")
+Path("MKBob.hex").write_text(key.hex() + "\n")
+Path("MKBob.kdf").write_text("PBKDF2-HMAC-SHA-256\niterations=600000\nkey_length=32\n")
+os.chmod("MKBob.salt", 0o600); os.chmod("MKBob.hex", 0o600); os.chmod("MKBob.kdf", 0o600)'
 		\end{verbatim}
 	}
 	\end{tcolorbox}
