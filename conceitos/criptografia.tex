@@ -153,15 +153,16 @@ A Figura \ref{fig:algoritmo_simetrico} ilustra o funcionamento do algoritmo de c
 \textbf{Funcionamento do Algoritmo de Criptografia Simétrico}
 
 \begin{enumerate}
-	\item Alice e Bob primeiro estabelecem uma chave secreta(K) que ambos irão usar para criptografar e descriptografar as mensagens.
+	\item Alice e Bob precisam obter a mesma chave secreta (K) por um mecanismo seguro antes de trocar mensagens. O comando abaixo gera uma chave aleatória de 256 bits para o exemplo; executá-lo em Alice não entrega automaticamente uma cópia a Bob.
 	\begin{tcolorbox}[width=\textwidth]
 		{\normalsize
 			\begin{verbatim}
+			$ umask 077
 			$ openssl rand -hex 32 > K.hex
 			\end{verbatim}
 		}
 	\end{tcolorbox}
-	\item Quando Alice deseja enviar o Texto Plano(T) confidencial para Bob, ela utiliza o algoritmo de Criptografia(C), a Chave Secreta(K) e um IV aleatório para transformar o Texto Plano(T) no Texto Cifrado(M). Este exemplo demonstra apenas confidencialidade; em produção, deve-se usar cifra autenticada ou adicionar um MAC.
+	\item Quando Alice deseja enviar o Texto Plano(T) para Bob, ela utiliza AES-256-CBC, a Chave Secreta(K) e um IV aleatório para gerar o Texto Cifrado(M). O IV não é secreto e deve acompanhar o texto cifrado; gere um IV novo e imprevisível para cada cifragem. Este exemplo demonstra apenas confidencialidade: em produção, prefira uma cifra autenticada (AEAD), como AES-GCM, ou combine CBC com um MAC usando uma chave independente e autentique o IV e o texto cifrado antes de decifrar.
 	\begin{tcolorbox}[width=\textwidth]
 		{\normalsize
 			\begin{verbatim}
@@ -172,7 +173,7 @@ A Figura \ref{fig:algoritmo_simetrico} ilustra o funcionamento do algoritmo de c
 			\end{verbatim}
 		}
 	\end{tcolorbox}
-	\item Alice então envia Texto Cifrado(M) para Bob através de um canal de comunicação inseguro. Eva, que está tentando interceptar a comunicação, pode conseguir acessar o Texto Cifrado(M), mas sem a chave secreta(K), ela não consegue compreender a mensagem original.
+	\item Alice envia o Texto Cifrado(M) e o IV para Bob através de um canal de comunicação inseguro. Se Eva apenas interceptar esses dados e a chave permanecer secreta, ela não deverá conseguir recuperar a mensagem original. Como CBC sozinho não autentica os dados, um atacante ativo ainda pode alterar o texto cifrado ou o IV sem que a alteração seja detectada de forma confiável.
 	\item Ao receber o Texto Cifrado(M), Bob utiliza o mesmo algoritmo de Descriptografia(D) e a Chave Secreta(K) para transformar o Texto Cifrado(M) de volta ao Texto Plano(T).
 	\begin{tcolorbox}[width=\textwidth]
 		{\normalsize
@@ -184,9 +185,9 @@ A Figura \ref{fig:algoritmo_simetrico} ilustra o funcionamento do algoritmo de c
 	\end{tcolorbox}
 \end{enumerate}
 
-A principal vantagem dos algoritmos de criptografia simétrica é sua eficiência e velocidade, especialmente em comparação com os algoritmos de criptografia assimétrica. No entanto, um dos desafios mais significativos é a distribuição segura da chave secreta. Se Eva conseguir interceptar ou descobrir a chave secreta, toda a comunicação entre Alice e Bob será comprometida.\\
+A principal vantagem dos algoritmos de criptografia simétrica é sua eficiência e velocidade, especialmente em comparação com os algoritmos de criptografia assimétrica. No entanto, Alice e Bob precisam estabelecer a chave secreta com segurança. Se Eva descobrir essa chave, poderá decifrar as mensagens protegidas por ela.\\
 
-Pelo motivo descrito acima, é essencial que Alice e Bob utilizem métodos seguros para compartilhar a chave secreta e garantam que ela permaneça protegida contra acessos não autorizados.\\
+Esses comandos são didáticos: o arquivo K.hex contém a chave em claro, e a opção \texttt{-K} passa a chave como argumento do processo, onde ela pode ficar visível durante a execução. Em produção, use uma biblioteca criptográfica e um mecanismo de armazenamento e uso de chaves que evitem essa exposição. Alice e Bob podem provisionar a chave por um canal protegido ou estabelecê-la por um protocolo autenticado de acordo de chaves.\\
 
 \subsection{Algoritmo Assimétrico}
 
@@ -223,7 +224,8 @@ O algoritmo de criptografia assimétrica é uma técnica fundamental no campo da
 		}
 	\end{tcolorbox}
 	\item Tanto Alice quanto Bob enviam as suas respectivas chaves públicas, KPuAlice e KPuBob, para um servidor de chave pública;
-	\item Quando Alice deseja enviar um Texto Plano (T) curto para Bob, ela utiliza a Chave Pública do Bob (KPuBob.pem) para gerar o Texto Cifrado (M). Com RSA de 2048 bits e OAEP/SHA-256, a entrada deve ter no máximo 190 bytes; para dados maiores, usar criptografia híbrida.
+	\item Antes de usar a chave pública recuperada do servidor, Alice deve verificar por um meio confiável que ela realmente pertence a Bob, por exemplo, validando um certificado digital ou comparando sua impressão digital por um canal autenticado. A presença da chave no servidor, por si só, não comprova essa associação: um atacante que substitua a chave de Bob pela sua própria pode interceptar a comunicação;
+	\item Quando Alice deseja enviar um Texto Plano (T) curto para Bob, ela utiliza a Chave Pública do Bob (KPuBob.pem) para gerar o Texto Cifrado (M). Com RSA de 2048 bits e OAEP/SHA-256, a entrada deve ter no máximo 190 bytes. Para mensagens maiores, usa-se criptografia híbrida: Alice cifra a mensagem com uma chave simétrica aleatória usando uma cifra autenticada, como AES-GCM, e cifra essa chave simétrica com a chave pública de Bob.
 	\begin{tcolorbox}[width=\textwidth]
 		{\normalsize
 			\begin{verbatim}
@@ -243,7 +245,9 @@ O algoritmo de criptografia assimétrica é uma técnica fundamental no campo da
 	\end{tcolorbox}
 \end{enumerate}
 
-A segurança do algoritmo de criptografia assimétrica reside no fato de que, mesmo que Eva (uma personagem mal-intencionada) intercepte a mensagem criptografada, ela não conseguirá descriptografá-la sem a chave privada de Bob. Desta forma, a confidencialidade da comunicação entre Alice e Bob é mantida.\\
+Se Alice usar uma chave pública de Bob cuja associação com ele foi verificada, e Bob proteger sua chave privada, a cifragem com RSA-OAEP protege a confidencialidade contra Eva, mesmo que ela intercepte o texto cifrado. Esse fluxo, por si só, não comprova que a mensagem foi enviada por Alice: qualquer pessoa que conheça a chave pública de Bob pode cifrar mensagens para ele. Para autenticar a origem, Alice deve assinar a mensagem com sua chave privada, e Bob deve verificar a assinatura usando uma chave pública de Alice cuja associação também seja confiável.\\
+
+Na criptografia híbrida, a cifra autenticada permite detectar alterações no conteúdo cifrado, mas não identifica quem o produziu. A assinatura digital fornece essa verificação de origem, desde que a chave pública do remetente esteja autenticada.
 
 \subsection{Key-Encryption-Key (KEK)}
 
