@@ -52,8 +52,7 @@ do PDF seja intencional.
    genpkey`~~ — feito.
 5. Completar `kek.tex` (seções "Arquitetura da Solução" e "Implementação e
    Melhores Práticas") e revisar alegações absolutas de segurança.
-6. Corrigir "quatro pilares" em `pki.tex` (lista só três) e a classificação
-   de "Conhecimento Zero" como pilar em `conceitos.tex`.
+6. Corrigir "quatro pilares" em `pki.tex` (lista só três).
 7. Enriquecer `gerador_senha.tex` com entropia em bits e modelo de ataque.
 8. Padronizar bloco de copyright (Versão/Autor) em `kek.tex` e `pki.tex`.
 9. Decidir política de versionamento de PDF gerado (hoje só

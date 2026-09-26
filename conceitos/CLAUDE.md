@@ -1,6 +1,6 @@
 # conceitos/criptografia.tex
 
-Documento-base do repositório: fundamentos, Conhecimento Zero,
+Documento-base do repositório: fundamentos, criptografia do lado do cliente,
 Confidencialidade (simétrica, assimétrica, KEK, KDF), Integridade (Hash),
 Autenticidade (Assinatura Digital), Confidencialidade com Criptografia
 Híbrida. É o texto mais completo e o melhor candidato para servir de
@@ -23,12 +23,6 @@ Personagens fixos: Alice, Bob, Eva (atacante passiva/interceptadora).
 
 ## Pendências reais
 
-- Seção "Princípios" lista quatro pilares: Conhecimento Zero,
-  Confidencialidade, Integridade, Autenticidade. "Conhecimento Zero" aqui
-  descreve dados cifrados localmente (arquitetura zero-knowledge/client-side
-  encryption), não uma prova de conhecimento zero — termo tecnicamente
-  impreciso e de categoria diferente da tríade CIA. Ver nota em
-  `../CLAUDE.md`.
 - Seção "Integridade" > "Hash": Bob envia `T` e `H(T)`, Alice recalcula e
   compara. Não há ressalva de que isso não protege contra atacante ativo
   (falta o aviso de usar HMAC/assinatura que outras seções deste mesmo

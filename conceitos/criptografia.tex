@@ -87,47 +87,48 @@
 % Página
 \section{Princípios}
 A segurança da informação é um campo fundamental no mundo digital atual, onde a proteção dos dados e informações é essencial para a manutenção da privacidade e a confiabilidade das operações.\\
-Dentro deste contexto, existem quatro pilares importantes que sustentam a segurança da informação: Conhecimento Zero, Confidencialidade, Integridade e Autenticidade. Esses pilares são fundamentais para garantir a proteção adequada dos dados e a confiança nas transações e comunicações. A seguir, vamos explorar cada um desses conceitos:
+Neste documento, vamos abordar três objetivos de segurança da informação: confidencialidade, integridade e autenticidade.
 
 \begin{itemize}
-	\item Conhecimento Zero
 	\item Confidencialidade
 	\item Integridade
 	\item Autenticidade
 \end{itemize}
 
+A criptografia do lado do cliente, descrita na seção seguinte e por vezes chamada de arquitetura de conhecimento zero, é um modelo de implementação, não um quarto objetivo nem uma prova criptográfica de conhecimento zero.
+
 \pagebreak
 
 % Página
-\section{Conhecimento Zero}
+\section{Criptografia do Lado do Cliente}
 
-O conceito de Conhecimento Zero, ou Zero Knowledge, refere-se a um modelo de segurança onde o provedor de serviços não possui acesso às informações confidenciais armazenadas pelos usuários. Todas as credenciais, como senhas, notas seguras e outros dados sensíveis, são criptografadas localmente no dispositivo do usuário antes de serem enviadas e armazenadas nos servidores.
+Neste contexto, \textbf{criptografia do lado do cliente} (também chamada de arquitetura de conhecimento zero) significa que os dados são cifrados e decifrados no dispositivo do usuário, e o serviço é projetado para não receber o texto plano, a Senha Mestra ou as chaves de dados em claro. O termo não se refere a uma prova criptográfica de conhecimento zero, que é uma técnica distinta para provar uma afirmação sem revelar o segredo usado na prova.
 
-\subsection{Funcionamento do Conhecimento Zero}
+\subsection{Funcionamento da Criptografia do Lado do Cliente}
 
 \begin{enumerate}
-	\item Criação e Armazenamento de Credenciais
+	\item Derivação da chave
 		\begin{itemize}
-			\item O usuário cria suas credenciais (senhas, notas seguras, etc.) no aplicativo.
-			\item Antes de qualquer dado ser transmitido para os servidores, ele é criptografado localmente utilizando uma chave derivada da Senha Mestra do usuário.
+			\item O cliente combina a Senha Mestra com um salt aleatório e usa uma KDF apropriada para derivar uma chave. O salt e os parâmetros da KDF podem ser armazenados junto aos dados cifrados; eles não precisam ser secretos.
 		\end{itemize}
-	\item Criptografia Local
+	\item Cifragem local
 		\begin{itemize}
-			\item A Senha Mestra é utilizada para gerar uma chave criptográfica.
-			\item Esta chave criptográfica é então utilizada para criptografar todos os dados do usuário localmente no dispositivo.
-			\item Os dados criptografados são enviados para os servidores para armazenamento seguro.
+			\item O cliente cifra as credenciais e outros dados localmente antes de enviá-los ao serviço.
+			\item Deve-se usar uma cifra autenticada (AEAD), como AES-GCM, com um nonce novo e único para cada operação sob a mesma chave. O texto cifrado, o nonce e a tag de autenticação são enviados e armazenados juntos.
 		\end{itemize}
-	\item Armazenamento Seguro
+	\item Armazenamento no serviço
 		\begin{itemize}
-			\item Nos servidores, apenas os dados criptografados são armazenados.
-			\item O servidor não possui acesso à Senha Mestra do usuário, nem à chave derivada da mesma. Isso significa que, mesmo que os servidores sejam comprometidos, os dados dos usuários permanecem inacessíveis e seguros.
+			\item O serviço armazena os dados cifrados e os metadados necessários para derivar a chave e decifrá-los, mas não deve receber as chaves em claro.
+			\item O serviço ainda pode conhecer metadados não cifrados, como tamanhos, horários e informações da conta, e pode apagar, reter ou reverter dados armazenados.
 		\end{itemize}
-	\item Descriptografia Local
+	\item Recuperação e decifragem
 		\begin{itemize}
-			\item Quando o usuário precisa acessar suas credenciais, os dados criptografados são baixados do servidor e descriptografados localmente no dispositivo, utilizando novamente a Senha Mestra.
-			\item Este processo garante que apenas o usuário, que possui conhecimento da Senha Mestra, pode acessar suas informações confidenciais.
+			\item O cliente baixa os dados cifrados, deriva novamente a chave com a Senha Mestra e o salt armazenado e verifica a tag AEAD antes de liberar o texto plano.
+			\item Se a verificação falhar, a chave ou os parâmetros podem estar incorretos, ou os dados podem ter sido alterados; a falha, por si só, não identifica a causa.
 		\end{itemize}
 \end{enumerate}
+
+Esse modelo reduz o acesso do provedor ao conteúdo, mas não torna os dados automaticamente seguros diante de qualquer comprometimento. Uma senha mestra fraca pode permitir tentativas de adivinhação offline contra os dados cifrados; um dispositivo comprometido pode capturar a senha ou o texto plano. Sem uma chave de recuperação independente, perder a Senha Mestra pode tornar os dados irrecuperáveis.
 
 \pagebreak
 
