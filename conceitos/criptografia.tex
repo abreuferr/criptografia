@@ -252,9 +252,9 @@ Na criptografia híbrida, a cifra autenticada permite detectar alterações no c
 
 \subsection{Key-Encryption-Key (KEK)}
 
-O conceito de Key-Encryption-Key(KEK), ou Chave de Criptografia de Chaves, é uma tecnologia utilizada para proteger outras chaves criptográficas, como por exemplo, o uso da KEK para proteger as Chaves de Criptografia de Dados(DEK). Ao usar uma KEK para resguardar as DEKs, adiciona-se uma camada extra de segurança ao sistema, melhorando significativamente sua proteção como um todo.\\
+Uma Key-Encryption Key (KEK), ou chave de criptografia de chaves, é usada para proteger (encapsular) outras chaves. Neste exemplo, MKBob, derivada da Senha Mestra por uma KDF, exerce o papel de KEK: ela protege a DEK, que por sua vez cifra os dados. Essa separação facilita o gerenciamento e a troca de chaves, mas não garante segurança por si só.\\
 
-A Figura \ref{fig:kek} ilustra o funcionamento e da utilização do conceito KEK.
+A Figura \ref{fig:kek} ilustra a hierarquia de chaves: M1 é a DEK protegida pela KEK, e M2 são os dados protegidos pela DEK.
 
 \begin{figure}[H]
 	\centering
@@ -263,18 +263,22 @@ A Figura \ref{fig:kek} ilustra o funcionamento e da utilização do conceito KEK
 	\label{fig:kek}
 \end{figure}
 
+\textbf{Nota sobre os comandos:} são exemplos didáticos e usam AES-CBC sem autenticação. Em produção, prefira AEAD para proteger M1 e M2; se CBC for necessário, use um MAC com chave independente que cubra o IV e o texto cifrado, e verifique-o antes de decifrar. Armazene com M1 seu IV, o salt e os parâmetros da KDF; armazene com M2 seu IV. A cópia de M1 permite tentativas offline de adivinhar a Senha Mestra, portanto a KDF não substitui uma senha forte. Os comandos gravam chaves em arquivos e passam valores secretos em argumentos de processo; não devem ser usados assim em produção.
+
 \textbf{- Criptografar a Chave de Dados(DEKBob)}
 
 \begin{enumerate}
-	\item Bob cria a Chave de Dados (DEKBob.bin);
+	\item Bob gera uma DEK aleatória de 256 bits;
 	\begin{tcolorbox}[width=\textwidth]
 		{\normalsize
 			\begin{verbatim}
+			$ set -o pipefail
+			$ umask 077
 			$ openssl rand -out DEKBob.bin 32
 			\end{verbatim}
 		}
 	\end{tcolorbox}
-	\item Bob deriva a Chave Mestra (MKBob.hex) a partir da Senha Mestra (MPBob), usando PBKDF2, SHA-256, 600.000 iterações e um salt aleatório de 128 bits;
+	\item Bob deriva a KEK (MKBob.hex) a partir da Senha Mestra com PBKDF2-HMAC-SHA-256, 600.000 iterações e um salt aleatório de 16 bytes (128 bits). O salt e os parâmetros da KDF não são secretos e devem ser preservados para a recuperação;
 	\begin{tcolorbox}[width=\textwidth]
 		{\footnotesize
 			\begin{verbatim}
@@ -287,7 +291,7 @@ A Figura \ref{fig:kek} ilustra o funcionamento e da utilização do conceito KEK
 			\end{verbatim}
 		}
 	\end{tcolorbox}
-	\item Aplicando o conceito de KEK, a Chave de Dados (DEKBob.bin) é criptografada com a Chave Mestra do Bob (MKBob.hex), gerando o Texto Cifrado M1. O IV acompanha o texto cifrado;
+	\item Bob protege (encapsula) a DEK com a KEK MKBob, gerando M1. O IV acompanha M1;
 	\begin{tcolorbox}[width=\textwidth]
 		{\scriptsize
 			\begin{verbatim}
@@ -298,7 +302,7 @@ A Figura \ref{fig:kek} ilustra o funcionamento e da utilização do conceito KEK
 			\end{verbatim}
 		}
 	\end{tcolorbox}
-	\item Bob envia o Texto Cifrado M1 para o servidor;
+	\item Bob envia M1, seu IV, o salt e os parâmetros da KDF para o servidor;
 \end{enumerate}
 
 \textbf{- Criptografar o Texto Plano(T) com uma Chave de Dados DEKBob}
@@ -316,7 +320,7 @@ A Figura \ref{fig:kek} ilustra o funcionamento e da utilização do conceito KEK
 			\end{verbatim}
 		}
 	\end{tcolorbox}
-	\item Bob utiliza sua Chave de Dados (DEKBob.bin) e um IV aleatório para cifrar o Texto Plano (T), gerando o Texto Cifrado M2;
+	\item Bob cifra o Texto Plano (T) com a DEK e um IV aleatório, gerando M2. O IV acompanha M2;
 	\begin{tcolorbox}[width=\textwidth]
 		{\small
 			\begin{verbatim}
@@ -328,7 +332,7 @@ A Figura \ref{fig:kek} ilustra o funcionamento e da utilização do conceito KEK
 			\end{verbatim}
 		}
 	\end{tcolorbox}
-	\item Bob envia o Texto Cifrado M2 para o servidor;
+	\item Bob envia M2 e seu IV para o servidor;
 \end{enumerate}
 
 \textbf{- Descriptografar o Texto Cifrado M2 para obter o Texto Plano(T)}
@@ -359,7 +363,7 @@ A Figura \ref{fig:kek} ilustra o funcionamento e da utilização do conceito KEK
 	\end{tcolorbox}
 \end{enumerate}
 
-O Key-Encryption-Key (KEK) é um componente essencial em arquiteturas de segurança que exigem a proteção de múltiplas chaves criptográficas \textbf{DEK}. Seu uso permite a proteção eficiente das DEKs, garantindo a segurança dos dados criptografados e simplificando a gestão das chaves. Implementar KEKs corretamente é necessário para manter a integridade e a confidencialidade dos dados em qualquer sistema seguro.\\
+Uma KEK protege chaves de dados e ajuda a separar a gestão de chaves da cifragem dos dados. A confidencialidade e a detecção de alterações dependem também dos algoritmos, modos e metadados usados; a hierarquia KEK/DEK, sozinha, não garante integridade nem autenticidade.
 
 \subsection{Key Derivation Functions (KDF)}
 
