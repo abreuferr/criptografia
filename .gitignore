@@ -8,3 +8,4 @@ gerador_senha/*.pdf
 *.log
 *.out
 *.toc
+.claude/settings.local.json
