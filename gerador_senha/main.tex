@@ -1,0 +1,37 @@
+\documentclass{article}
+
+% Preâmbulo: pacotes, estilos e configurações em config/preambulo.tex
+\input{config/preambulo}
+
+\begin{document}
+\NoBgThispage % Ignorar background na capa
+\maketitle
+\begin{center}
+\includegraphics{logo.png}
+\end{center}
+\begin{center}
+\textbf{\LARGE \\PÚBLICO}
+\end{center}
+\pagenumbering{gobble} % Não contar como página a capa
+\pagebreak
+
+% Background a partir da segunda pagina
+\backgroundsetup{contents=\includegraphics{logo.png}, scale=1.5, opacity=0.15, angle=0} % marca d'agua
+
+\input{capitulos/00-resumo}
+
+%Sumario
+\tableofcontents
+\pagebreak
+
+%Texto
+\fancyfoot[CO]{\thepage\\\changefont Qualquer reprodução ou distribuição é estritamente proibida sem a aprovação prévia por escrito da empresa MT4.}
+\pagenumbering{arabic}
+
+\input{capitulos/01-senha}
+
+\input{capitulos/02-estudo}
+
+\input{capitulos/03-conclusao}
+
+\end{document}

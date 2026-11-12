@@ -4,6 +4,10 @@ kek/*.pdf
 gerador_senha/*.pdf
 
 # Artefatos de compilação do LaTeX
+build/
+*.fls
+*.fdb_latexmk
+*.synctex.gz
 *.aux
 *.log
 *.out

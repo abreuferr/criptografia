@@ -14,6 +14,12 @@ binário. Se recompilar para conferir algo, reverter o PDF depois
 (`git checkout -- caminho/arquivo.pdf`) a menos que a mudança de conteúdo
 do PDF seja intencional.
 
+**Layout por documento:** cada pasta usa `main.tex` + `config/preambulo.tex` +
+`capitulos/NN-*.tex` (um por `\section`). Os nomes `conceitos.tex`, `pki.tex`
+etc. citados abaixo e nos CLAUDE.md das pastas referem-se ao conteúdo em
+`capitulos/`. O PDF novo sai em `build/main.pdf` (ignorado); os PDFs
+versionados continuam com o nome antigo e não são regerados automaticamente.
+
 ## Pontos transversais (afetam mais de um documento)
 
 - **Hash sem chave não é integridade autenticada.** `conceitos.tex` e

@@ -1,0 +1,38 @@
+\documentclass{article}
+
+% Preâmbulo: pacotes, estilos e configurações em config/preambulo.tex
+\input{config/preambulo}
+
+\begin{document}
+\NoBgThispage % Ignorar background na capa
+\maketitle
+
+\begin{center}
+\includegraphics{logo.png}
+\end{center}
+
+\pagenumbering{gobble} % Não contar como página a capa
+\pagebreak
+
+% Background a partir da segunda pagina
+\backgroundsetup{contents=\includegraphics{logo.png}, scale=1.5, opacity=0.15, angle=0} % marca d'agua
+
+\input{capitulos/00-resumo}
+
+%Sumario
+\tableofcontents
+\pagebreak
+
+% Rodapé
+\fancyfoot[CO]{\thepage\\\changefont Qualquer reprodução ou distribuição é estritamente proibida sem a aprovação prévia por escrito da empresa MT4.}
+\pagenumbering{arabic}
+
+\input{capitulos/01-o-desafio-da-seguranca-em-acessos-privilegiados}
+
+\input{capitulos/02-fundamentos-de-protecao}
+
+\input{capitulos/03-segura-cofre-aplicando-key-encryption-key-na-pratica}
+
+\input{capitulos/04-implementacao-e-melhores-praticas}
+
+\end{document}

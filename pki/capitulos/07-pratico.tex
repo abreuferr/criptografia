@@ -1,0 +1,292 @@
+%Página
+\section{Prático}
+
+\begin{enumerate}
+	\item CA Root / CA Intermediária - Estrutura de Diretórios
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ mkdir -p /root/ca/root-ca/{certs,crl,newcerts,private}
+			$ mkdir -p /root/ca/intermediate-ca/{certs,crl,csr,newcerts,private}
+			$ mkdir /root/ca/user-certs
+			$ chmod 700 /root/ca/root-ca/private /root/ca/intermediate-ca/private
+			$ touch /root/ca/root-ca/index.txt /root/ca/intermediate-ca/index.txt
+			$ echo 1000 > /root/ca/root-ca/serial
+			$ echo 1000 > /root/ca/intermediate-ca/serial
+			$ echo 1000 > /root/ca/root-ca/crlnumber
+			$ echo 1000 > /root/ca/intermediate-ca/crlnumber
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item CA Root - Configuração da CA Root (/root/ca/root-ca/openssl.cnf)
+	\begin{tcolorbox}[width=\textwidth, enhanced, breakable]
+	{\footnotesize
+		\begin{verbatim}
+			[ ca ]
+			default_ca = CA_default
+			
+			[ CA_default ]
+			dir               = /root/ca/root-ca
+			certs             = $dir/certs
+			crl_dir           = $dir/crl
+			new_certs_dir     = $dir/newcerts
+			database          = $dir/index.txt
+			serial            = $dir/serial
+			private_key       = $dir/private/root-ca.key.pem
+			certificate       = $dir/certs/root-ca.cert.pem
+			crlnumber         = $dir/crlnumber
+			crl               = $dir/crl/root-ca.crl.pem
+			crl_extensions    = crl_ext
+			default_crl_days  = 30
+			default_md        = sha256
+			name_opt          = ca_default
+			cert_opt          = ca_default
+			default_days      = 3650
+			preserve          = no
+			policy            = policy_strict
+			
+			[ policy_strict ]
+			countryName             = match
+			stateOrProvinceName     = match
+			organizationName        = match
+			organizationalUnitName  = optional
+			commonName              = supplied
+			emailAddress            = optional
+			
+			[ req ]
+			default_bits        = 4096
+			distinguished_name  = req_distinguished_name
+			string_mask         = utf8only
+			default_md          = sha256
+			prompt              = no
+			
+			[ req_distinguished_name ]
+			countryName                     = BR
+			stateOrProvinceName             = Sao Paulo
+			localityName                    = Sao Paulo
+			0.organizationName              = senhasegura
+			organizationalUnitName          = IT Department
+			commonName                      = My Root CA
+			emailAddress                    = mt4@senhasegura.com
+			
+			[ v3_ca ]
+			subjectKeyIdentifier = hash
+			authorityKeyIdentifier = keyid:always,issuer
+			basicConstraints = critical,CA:true
+			keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+			
+			[ v3_intermediate_ca ]
+			subjectKeyIdentifier = hash
+			authorityKeyIdentifier = keyid:always,issuer
+			basicConstraints = critical,CA:true,pathlen:0
+			keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+			
+			[ crl_ext ]
+			authorityKeyIdentifier=keyid:always
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item CA Intermediária - Configuração da CA Intermediária (/root/ca/intermediate-ca/openssl.cnf)
+	\begin{tcolorbox}[width=\textwidth, enhanced, breakable]
+	{\footnotesize
+		\begin{verbatim}
+			$ cat /root/ca/intermediate-ca/openssl.cnf
+
+			[ ca ]
+			default_ca = CA_default
+			
+			[ CA_default ]
+			dir               = /root/ca/intermediate-ca
+			certs             = $dir/certs
+			crl_dir           = $dir/crl
+			new_certs_dir     = $dir/newcerts
+			database          = $dir/index.txt
+			serial            = $dir/serial
+			private_key       = $dir/private/intermediate-ca.key.pem
+			certificate       = $dir/certs/intermediate-ca.cert.pem
+			crlnumber         = $dir/crlnumber
+			crl               = $dir/crl/intermediate-ca.crl.pem
+			crl_extensions    = crl_ext
+			default_crl_days  = 30
+			default_md        = sha256
+			name_opt          = ca_default
+			cert_opt          = ca_default
+			default_days      = 3650
+			preserve          = no
+			policy            = policy_loose
+			
+			[ policy_loose ]
+			countryName             = match
+			stateOrProvinceName     = match
+			organizationName        = match
+			organizationalUnitName  = optional
+			commonName              = supplied
+			emailAddress            = optional
+			
+			[ req ]
+			default_bits        = 4096
+			distinguished_name  = req_distinguished_name
+			string_mask         = utf8only
+			default_md          = sha256
+			prompt              = no
+			
+			[ req_distinguished_name ]
+			countryName                     = BR
+			stateOrProvinceName             = Sao Paulo
+			localityName                    = Sao Paulo
+			0.organizationName              = senhasegura
+			organizationalUnitName          = SEGi9
+			commonName                      = My Intermediate CA
+			emailAddress                    = segi9@senhasegura.com
+			
+			[ v3_intermediate_ca ]
+			subjectKeyIdentifier = hash
+			authorityKeyIdentifier = keyid:always,issuer
+			basicConstraints = critical,CA:true,pathlen:0
+			keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+			
+			[ crl_ext ]
+			authorityKeyIdentifier=keyid:always
+			
+			[ usr_cert ]
+			basicConstraints = CA:FALSE
+			nsCertType = client, email
+			nsComment = "User Certificate"
+			subjectKeyIdentifier = hash
+			authorityKeyIdentifier = keyid,issuer
+			keyUsage = critical, nonRepudiation, digitalSignature, keyEncipherment
+			extendedKeyUsage = clientAuth, emailProtection
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item CA Root - Criar o Par de Chaves e Certificado da CA Root
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ openssl genpkey -algorithm RSA -out /root/ca/root-ca/private/root-ca.key.pem \
+			-pkeyopt rsa_keygen_bits:4096
+
+			$ chmod 400 /root/ca/root-ca/private/root-ca.key.pem
+			
+			$ openssl req -config /root/ca/root-ca/openssl.cnf -key /root/ca/root-ca/private/root-ca.key.pem \
+			-new -x509 -days 7300 -sha256 -extensions v3_ca -out /root/ca/root-ca/certs/root-ca.cert.pem
+
+			$ chmod 444 /root/ca/root-ca/certs/root-ca.cert.pem
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item CA Intermediária - Criar o Par de Chaves da CA Intermediária
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ openssl genpkey -algorithm RSA -out /root/ca/intermediate-ca/private/intermediate-ca.key.pem \
+			-pkeyopt rsa_keygen_bits:4096
+
+			$ chmod 400 /root/ca/intermediate-ca/private/intermediate-ca.key.pem
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item CA Intermediária - Criar a Solicitação de Certificado (CSR) da CA Intermediária
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ openssl req -config /root/ca/intermediate-ca/openssl.cnf -new -sha256 \
+			-key /root/ca/intermediate-ca/private/intermediate-ca.key.pem \
+			-out /root/ca/intermediate-ca/csr/intermediate-ca.csr.pem
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item CA Root / CA Intermediária - Assinar o Certificado da CA Intermediária com a CA Root
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ openssl ca -batch -config /root/ca/root-ca/openssl.cnf -extensions v3_intermediate_ca \
+			-days 3650 -notext -md sha256 -in /root/ca/intermediate-ca/csr/intermediate-ca.csr.pem \
+			-out /root/ca/intermediate-ca/certs/intermediate-ca.cert.pem
+
+			$ chmod 444 /root/ca/intermediate-ca/certs/intermediate-ca.cert.pem
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item CA Intermediária - Criar a Cadeia de Certificados
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ cat /root/ca/intermediate-ca/certs/intermediate-ca.cert.pem /root/ca/root-ca/certs/root-ca.cert.pem > \
+			/root/ca/intermediate-ca/certs/ca-chain.cert.pem
+
+			$ chmod 444 /root/ca/intermediate-ca/certs/ca-chain.cert.pem
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item Usuário - Criar o Par de Chaves do Usuário Final
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ openssl genpkey -algorithm RSA -out /root/ca/user-certs/user.key.pem -pkeyopt rsa_keygen_bits:2048
+
+			$ chmod 400 /root/ca/user-certs/user.key.pem
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item Usuário - Criar a Solicitação de Certificado (CSR) do Usuário Final
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ openssl req -new -sha256 -key /root/ca/user-certs/user.key.pem \
+			-subj "/C=BR/ST=Sao Paulo/L=Sao Paulo/O=senhasegura/OU=Users/CN=usuario.exemplo" \
+			-out /root/ca/user-certs/user.csr.pem
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item Usuário - Assinar o Certificado de Usuário Final com a CA Intermediária
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ openssl ca -batch -config /root/ca/intermediate-ca/openssl.cnf -extensions usr_cert -days 375 -notext \
+			-md sha256 -in /root/ca/user-certs/user.csr.pem -out /root/ca/user-certs/user.cert.pem
+
+			$ chmod 444 /root/ca/user-certs/user.cert.pem
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+	\item Usuário - Verificar a Cadeia de Certificados
+	\begin{tcolorbox}[width=\textwidth]
+	{\footnotesize
+		\begin{verbatim}
+			$ openssl verify -CAfile /root/ca/intermediate-ca/certs/ca-chain.cert.pem \
+			/root/ca/user-certs/user.cert.pem
+		\end{verbatim}
+	}
+	\end{tcolorbox}
+
+\end{enumerate}
+
+\pagebreak
+
+%Copyright
+\vspace*{\fill}
+\begin{flushright}
+	\underline{\textit{Copyright}}\\
+	All rights reserved to MT4 Tecnologia LTDA.\bigskip
+
+	\underline{\textit{Propósito deste documento}}\\
+	Infraestrutura de Chaves Públicas (PKI)\bigskip
+	
+	\underline{\textit{MT4 Tecnologia Ltda.}}\\
+	Rua Joaquim Antunes, 767 – Pinheiros – São Paulo\\
+	Phone: +55 11 3065-7070\\
+	\url{www.mt4.com.br}\\
+	\href{mailto:support@senhasegura.com}{support@senhasegura.com}\\
+\end{flushright}

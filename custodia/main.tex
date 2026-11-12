@@ -1,0 +1,39 @@
+\documentclass[12pt]{article}
+
+% Preâmbulo: pacotes, estilos e configurações em config/preambulo.tex
+\input{config/preambulo}
+
+\begin{document}
+\NoBgThispage % Ignorar background na capa
+\maketitle
+\begin{center}
+\includegraphics{logo.png}
+\end{center}
+\pagenumbering{gobble} % Não contar como página a capa
+\pagebreak
+
+%Marca d'agua
+\backgroundsetup{contents=\includegraphics{logo.png}, scale=1.5, opacity=0.15, angle=0}
+
+\input{capitulos/00-resumo}
+
+%Sumario
+\tableofcontents
+
+\pagebreak
+
+%Rodapé
+\fancyfoot[CO]{\thepage\\\changefont Qualquer reprodução ou distribuição é estritamente proibida sem a aprovação prévia por escrito da empresa MT4.}
+\pagenumbering{arabic}
+
+\textbf{Nota sobre os exemplos:} os comandos com AES-CBC abaixo ilustram a proteção de confidencialidade e deixam explícitos chave e IV. Em uma implementação real, cada texto cifrado deve também ser autenticado (por exemplo, com HMAC em chave independente) ou protegido por uma construção AEAD apropriada.
+
+\pagebreak
+
+\input{capitulos/01-seguranca-das-chaves-de-criptografia}
+
+\input{capitulos/02-custodia-das-chaves-de-criptografia}
+
+\input{capitulos/03-recuperando-custodia-das-chaves}
+
+\end{document}
