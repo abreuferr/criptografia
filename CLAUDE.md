@@ -8,11 +8,12 @@ editar o `.tex` dela.
 `password_manager/` — tópico planejado; diretório ainda não criado (por
 isso não aparece no README).
 
-PDFs de `algoritmo/`, `conceitos/` e `custodia/` estão versionados no git —
-não recompilar por conta própria só para "atualizar" o PDF; isso gera diff
-binário. Se recompilar para conferir algo, reverter o PDF depois
-(`git checkout -- caminho/arquivo.pdf`) a menos que a mudança de conteúdo
-do PDF seja intencional.
+PDFs não são versionados: a compilação gera `build/main.pdf` em cada pasta (ignorado pelo git).
+
+**Layout por documento:** cada pasta usa `main.tex` + `config/preambulo.tex` +
+`capitulos/NN-*.tex` (um por `\section`). Os nomes `conceitos.tex`, `pki.tex`
+etc. citados abaixo e nos CLAUDE.md das pastas referem-se ao conteúdo em
+`capitulos/`.
 
 ## Pontos transversais (afetam mais de um documento)
 
@@ -55,5 +56,4 @@ do PDF seja intencional.
 6. Corrigir "quatro pilares" em `pki.tex` (lista só três).
 7. Enriquecer `gerador_senha.tex` com entropia em bits e modelo de ataque.
 8. Padronizar bloco de copyright (Versão/Autor) em `kek.tex` e `pki.tex`.
-9. Decidir política de versionamento de PDF gerado (hoje só
-   `algoritmo/`, `conceitos/` e `custodia/` versionam o PDF).
+9. ~~Decidir política de versionamento de PDF~~ — feito: PDFs não são versionados.

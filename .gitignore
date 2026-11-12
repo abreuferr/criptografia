@@ -1,11 +1,13 @@
-# PDFs não versionados neste projeto (ver CLAUDE.md: só algoritmo/, conceitos/ e custodia/ versionam PDF)
-pki/*.pdf
-kek/*.pdf
-gerador_senha/*.pdf
+# PDFs (saída em build/ e PDFs soltos)
+*.pdf
 
 # Artefatos de compilação do LaTeX
+build/
 *.aux
 *.log
 *.out
 *.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
 .claude/settings.local.json
